@@ -8,7 +8,7 @@
 PRODUCT_NAME = motplay
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.motplay
+PRODUCT_BUNDLE_IDENTIFIER = com.motoplay.na
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2023 com.example. All rights reserved.

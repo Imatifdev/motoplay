@@ -1,4 +1,4 @@
-package com.example.motplay
+package com.motoplay.na
 
 import io.flutter.embedding.android.FlutterActivity
 

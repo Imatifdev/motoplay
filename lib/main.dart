@@ -1,5 +1,8 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
-import 'package:motplay/screens/dashboard.dart';
+import 'package:motplay/test/blogger_api.dart';
+import 'package:motplay/test/testing_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -9,17 +12,17 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Moto Play',
       theme: ThemeData(
         fontFamily: GoogleFonts.teko().fontFamily,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Dashboard(),
+      home: const BloggerAPIScreen(),
     );
   }
 }
