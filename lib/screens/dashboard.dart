@@ -1,5 +1,10 @@
+import 'package:blogger_api/blogger_api.dart';
 import 'package:flutter/material.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:http/http.dart' as http;
+import 'package:xml/xml.dart';
+import '../test/html_view.dart';
+import '../utils/constanst.dart';
 import '../utils/mycolors.dart';
 
 class Dashboard extends StatefulWidget {
@@ -12,34 +17,90 @@ class Dashboard extends StatefulWidget {
 int selectedButton = 1;
 
 class _DashboardState extends State<Dashboard> {
+  List<Map<String, String?>> posts = [];
+  Future<PostModel> getAllpost() async {
+    final res = await BloggerAPI().getAllPostFromBlog(
+      includeComment: true,
+      blogId: blogIds[0],
+      apiKey: key,
+    );
+    return res;
+  }
+
+  Future<List<Map<String, String?>>> fetchPosts(String blogId, String apiKey) async {
+  print("test 1");
+  String url = 'https://www.googleapis.com/blogger/v3/blogs/$blogId/posts?key=$apiKey'; 
+             //'https://www.googleapis.com/blogger/v3/blogs/$blogId/posts?key=$apiKey';
+  http.Response response = await http.get(Uri.parse(url));
+  print("test 2");
+  // Wrap the XML response with a root element
+  String wrappedXml = '<root>${response.body}</root>';
+  XmlDocument xmlDocument = XmlDocument.parse(wrappedXml);
+  print("test 3");
+  //List<Map<String, String?>> posts = [];
+  Iterable<XmlElement> entries = xmlDocument.findAllElements('entry');
+  print("test 4");
+  entries.forEach((entry) {
+    String? title = entry.findElements('title').first.value;
+    String? content = entry.findElements('content').first.value;
+    String? published = entry.findElements('published').first.value;
+    String? updated = entry.findElements('updated').first.value;
+    String? img = entry.findElements('image').first.getAttribute('url');
+    String url = entry.findElements('link').first.getAttribute('href') as String;
+    Map<String, String?> post = {
+      'title': title,
+      'content': content,
+      'published': published,
+      'updated': updated,
+      'url': url,
+      'img':img
+    };
+    setState(() {
+      posts.add(post);
+      print(post["title"]);
+    });
+  });
+  print("test 5");
+  print(response.statusCode);
+  print("test 6");
+  return posts;
+}
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     final textScaleFactor = MediaQuery.of(context).textScaleFactor;
-
     // Adjust font size based on screen width and text scale factor
     //final fontSize = screenWidth * 0.14 * textScaleFactor;
-    final subheading = screenWidth * 0.07 * textScaleFactor;
+    //final subheading = screenWidth * 0.07 * textScaleFactor;
     final heading = screenWidth * 0.14 * textScaleFactor;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: blue,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.white),
+        title: ElevatedButton(onPressed: ()async{
+          await fetchPosts(blogIds[0], key);
+          //for(Map post in posts){
+            print(posts);
+          //}
+        },child: const Text("API Call")),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
-      drawer: Drawer(),
+      drawer: Drawer(
+        backgroundColor: Colors.blue.shade100,
+      ),
       body: Column(children: [
         Container(
           width: screenWidth,
-          height: screenHeight * 0.11,
+          height: screenHeight * 0.12,
           decoration: BoxDecoration(color: blue, boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
               blurRadius: 10.0,
               spreadRadius: 2.0,
-              offset: Offset(0, 3), // Horizontal and vertical offset
+              offset: const Offset(0, 3),
             ),
           ]),
           child: Column(
@@ -62,10 +123,10 @@ class _DashboardState extends State<Dashboard> {
               color: Colors.grey.withOpacity(0.5),
               blurRadius: 10.0,
               spreadRadius: 2.0,
-              offset: Offset(0, 3), // Horizontal and vertical offset
+              offset: const Offset(0, 3), // Horizontal and vertical offset
             ),
           ]),
-          child: Column(
+          child: const Column(
             children: [],
           ),
         ),
@@ -78,28 +139,83 @@ class _DashboardState extends State<Dashboard> {
                   selectedButton = 1;
                 });
               },
-              child: Text('Button 1'),
+              child: const Text('Button 1'),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             ElevatedButton(
               onPressed: () {
                 setState(() {
                   selectedButton = 2;
                 });
               },
-              child: Text('Button 2'),
+              child: const Text('Button 2'),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             ElevatedButton(
               onPressed: () {
                 setState(() {
                   selectedButton = 3;
                 });
               },
-              child: Text('Button 3'),
+              child: const Text('Button 3'),
             ),
           ],
         ),
+      FutureBuilder(
+          future: getAllpost(),
+          builder: ((context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+            if (snapshot.hasError) {
+              return const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text('Try Again'),
+                ),
+              );
+            } else {
+              return Expanded(
+                child: ListView.builder(
+                    itemCount: snapshot.data!.items!.length,
+                    itemBuilder: (ctx, index) {
+                      // PostItemModel postItem = PostItemModel();
+                      return Center(
+                        child: Card(
+                            child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HTMLVIew(
+                                        data: snapshot.data!.items![index],
+                                      )),
+                            );
+                          },
+                          child: Container(
+                              height: 200,
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  // CachedNetworkImage(
+                                  //   imageUrl:snapshot.data!.items![index]. ,
+                                  // ),
+                                  Text(snapshot.data!.items![index].title!),
+                                ],
+                              )),
+                        )),
+                      );
+                    }),
+              );
+            }
+          })),  
       ]),
     );
   }
