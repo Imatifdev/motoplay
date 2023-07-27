@@ -4,6 +4,8 @@ import 'package:blogger_api/blogger_api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:motplay/screens/configration.dart';
+import 'package:motplay/screens/dmca.dart';
 import 'package:xml/xml.dart';
 import '../test/html_view.dart';
 import '../utils/constanst.dart';
@@ -137,6 +139,10 @@ class _DashboardState extends State<Dashboard> {
               thickness: 0.5,
             ),
             ListTile(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (ctx) => Configration()));
+              },
               leading: Icon(Icons.settings),
               title: Text(
                 "Configration",
@@ -247,6 +253,10 @@ class _DashboardState extends State<Dashboard> {
               thickness: 0.5,
             ),
             ListTile(
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (ctx) => DMCA()));
+              },
               leading: ImageIcon(AssetImage("assets/images/icon4.png")),
               title: Text(
                 "DMCA ",
