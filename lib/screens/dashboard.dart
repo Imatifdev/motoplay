@@ -1,6 +1,5 @@
 import 'package:blogger_api/blogger_api.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart';
 import '../test/html_view.dart';
@@ -135,31 +134,100 @@ class _DashboardState extends State<Dashboard> {
           children: [
             ElevatedButton(
               onPressed: () {
-                setState(() {
-                  selectedButton = 1;
-                });
+                // setState(() {
+                //   selectedButton = 1;
+                // });
               },
               child: const Text('Button 1'),
             ),
             const SizedBox(width: 10),
             ElevatedButton(
               onPressed: () {
-                setState(() {
-                  selectedButton = 2;
-                });
+                // setState(() {
+                //   selectedButton = 2;
+                // });
               },
               child: const Text('Button 2'),
             ),
             const SizedBox(width: 10),
             ElevatedButton(
               onPressed: () {
-                setState(() {
-                  selectedButton = 3;
-                });
+                // setState(() {
+                //   selectedButton = 3;
+                // });
               },
               child: const Text('Button 3'),
             ),
           ],
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            color: Colors.blue.shade100,
+            width: double.infinity,
+            height: screenHeight /3.5 ,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical:15.0, horizontal: 25),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: 70,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Image.asset("assets/images/f1.png"),
+                            const Text("GB Hungria", style: TextStyle(fontSize: 21),)
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 70,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Image.asset("assets/images/txt.png"),
+                            const SizedBox(height:10),
+                            const Text("Finalizado", style: TextStyle(fontSize: 21),)
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 70,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Image.asset("assets/images/gun.png"),
+                            const Text("Carrera", style: TextStyle(fontSize: 21),)
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children:[
+                    SizedBox(
+                      height: screenHeight/6.9,
+                      width: screenWidth/3.1,
+                      child: Card(color: Colors.blue.shade300,)),
+                    SizedBox(
+                      height: 130,
+                      width: 130,
+                      child: Card(color: Colors.blue.shade300,)),
+                    SizedBox(
+                      height: 130,
+                      width: 130,
+                      child: Card(color: Colors.blue.shade300,)),  
+                    ]
+                )
+                ]
+            ) ,
+          ),
         ),
       FutureBuilder(
           future: getAllpost(),
@@ -184,7 +252,6 @@ class _DashboardState extends State<Dashboard> {
                 child: ListView.builder(
                     itemCount: snapshot.data!.items!.length,
                     itemBuilder: (ctx, index) {
-                      // PostItemModel postItem = PostItemModel();
                       return Center(
                         child: Card(
                             child: InkWell(
