@@ -10,10 +10,11 @@ import 'package:motplay/screens/dmca.dart';
 import 'package:motplay/screens/privacy-policy.dart';
 import 'package:xml/xml.dart' as xml;
 import '../models/new_post.dart' hide Image;
-import '../models/post_model.dart'hide Image;
+import '../models/post_model.dart' hide Image;
 import '../test/html_view.dart';
 import '../utils/constanst.dart';
 import '../utils/mycolors.dart';
+import 'donation.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -26,30 +27,28 @@ int selectedButton = 1;
 
 class _DashboardState extends State<Dashboard> {
   List<Map<String, String?>> posts = [];
-  
-  
+
   void imgLink() async {
-  // Replace 'your_api_url_here' with the actual API endpoint URL
-  final response = await http.get(Uri.parse('https://www.googleapis.com/blogger/v3/blogs/${blogIds[0]}/posts?key=$key'));
-  final jsonData = jsonDecode(response.body);
+    // Replace 'your_api_url_here' with the actual API endpoint URL
+    final response = await http.get(Uri.parse(
+        'https://www.googleapis.com/blogger/v3/blogs/${blogIds[0]}/posts?key=$key'));
+    final jsonData = jsonDecode(response.body);
 
-  // Access the content field for the first item (assuming there's only one item in 'items')
-  final content = jsonData['items'][0]['content'];
+    // Access the content field for the first item (assuming there's only one item in 'items')
+    final content = jsonData['items'][0]['content'];
 
-  // Use the html package to parse the HTML content
-  final document = htmlParser.parse(content);
-  final imageElement = document.querySelector('img');
+    // Use the html package to parse the HTML content
+    final document = htmlParser.parse(content);
+    final imageElement = document.querySelector('img');
 
-  if (imageElement != null) {
-    // Extract the 'src' attribute to get the image link
-    final imageLink = imageElement.attributes['src'];
-    print(imageLink);
-  } else {
-    print('Image not found in the content.');
+    if (imageElement != null) {
+      // Extract the 'src' attribute to get the image link
+      final imageLink = imageElement.attributes['src'];
+      print(imageLink);
+    } else {
+      print('Image not found in the content.');
+    }
   }
-}
-
-
 
   Future<PostModel> getAllpost() async {
     final res = await BloggerAPI().getAllPostFromBlog(
@@ -61,81 +60,54 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Future<Map<String, String?>?> fetchPosts(String blogId, String apiKey) async {
-  String url = 'https://www.googleapis.com/blogger/v3/blogs/$blogId/posts?key=$apiKey';
-  http.Response response = await http.get(Uri.parse(url));
+    String url =
+        'https://www.googleapis.com/blogger/v3/blogs/$blogId/posts?key=$apiKey';
+    http.Response response = await http.get(Uri.parse(url));
 
-  if (response.statusCode == 200) {
-    Map<String, dynamic> jsonData = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      Map<String, dynamic> jsonData = jsonDecode(response.body);
 
-    if (jsonData.containsKey('items') && jsonData['items'] is List) {
-      List<dynamic> items = jsonData['items'];
-      for (var item in items) {
-        String? title = item['title'];
-        String? content = item['content'];
-        String? published = item['published'];
-        String? updated = item['updated'];
+      if (jsonData.containsKey('items') && jsonData['items'] is List) {
+        List<dynamic> items = jsonData['items'];
+        for (var item in items) {
+          String? title = item['title'];
+          String? content = item['content'];
+          String? published = item['published'];
+          String? updated = item['updated'];
 
-        // Use the html package to parse the HTML content
-        final document = htmlParser.parse(content);
-        final imageElement = document.querySelector('img');
-        String? imageLink = imageElement?.attributes['src'];
+          // Use the html package to parse the HTML content
+          final document = htmlParser.parse(content);
+          final imageElement = document.querySelector('img');
+          String? imageLink = imageElement?.attributes['src'];
 
-        Map<String, String?> post = {
-          'title': title,
-          'content': content,
-          'published': published,
-          'updated': updated,
-          'imageLink': imageLink, // Add the image link to the map
-        };
-        setState(() {
-          posts.add(post);
-        });
+          Map<String, String?> post = {
+            'title': title,
+            'content': content,
+            'published': published,
+            'updated': updated,
+            'imageLink': imageLink, // Add the image link to the map
+          };
+          setState(() {
+            posts.add(post);
+          });
+        }
+
+        return posts[1];
+      } else {
+        // Handle invalid API response
+        print('Invalid API response: items not found');
       }
-
-      return posts[1];
     } else {
-      // Handle invalid API response
-      print('Invalid API response: items not found');
+      // Handle HTTP request error
+      print('HTTP request failed with status code: ${response.statusCode}');
     }
-  } else {
-    // Handle HTTP request error
-    print('HTTP request failed with status code: ${response.statusCode}');
+
+    // Return null in case of an error
+    return null;
   }
 
-  // Return null in case of an error
-  return null;
-}
-//   Future<List<Post>> fetchPosts(String blogId, String apiKey) async {
-//   String url = 'https://www.googleapis.com/blogger/v3/blogs/$blogId/posts?key=$apiKey';
-//   http.Response response = await http.get(Uri.parse(url));
+  int selectedButton = 0; // Track the selected button
 
-//   if (response.statusCode == 200) {
-//     xml.XmlDocument xmlDocument = xml.XmlDocument.parse(response.body);
-//     Iterable<xml.XmlElement> entries = xmlDocument.findAllElements('entry');
-//     List<Post> posts = entries.map((entry) => Post.fromXml(entry)).toList();
-//     return posts;
-//   } else {
-//     throw Exception('Failed to load posts');
-//   }
-// }
-
-//   void fetchData() async {
-//   // String blogId = 'your_blog_id';
-//   // String apiKey = 'your_api_key';
-//   try {
-//     Post post = (await fetchPosts(blogIds[0], key)) as Post;
-//     // Use the post object here
-//     // For example, you can access the list of items as post.items
-//     post.items.forEach((item) {
-//       print('Title: ${item.title}');
-//       print('Content: ${item.labels}');
-//       // Access other properties as needed
-//     });
-//   } catch (e) {
-//     print('Error: $e');
-//   }
-// }
-  
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -152,9 +124,9 @@ class _DashboardState extends State<Dashboard> {
         elevation: 0,
         title: ElevatedButton(
             onPressed: () async {
-             Map? map = await fetchPosts(blogIds[0], key); 
-             print(map!['imageLink']); 
-             print(posts);
+              Map? map = await fetchPosts(blogIds[0], key);
+              print(map!['imageLink']);
+              print(posts);
               //for(Map post in posts){
               //print(posts);
               //}
@@ -220,6 +192,10 @@ class _DashboardState extends State<Dashboard> {
               thickness: 0.5,
             ),
             ListTile(
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (ctx) => Donation()));
+              },
               leading: ImageIcon(AssetImage("assets/images/icons7.png")),
               title: Text(
                 "Donación",
@@ -378,31 +354,69 @@ class _DashboardState extends State<Dashboard> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                // setState(() {
-                //   selectedButton = 1;
-                // });
-              },
-              child: const Text('Button 1'),
-            ),
-            const SizedBox(width: 10),
-            ElevatedButton(
-              onPressed: () {
-                // setState(() {
-                //   selectedButton = 2;
-                // });
-              },
-              child: const Text('Button 2'),
-            ),
-            const SizedBox(width: 10),
-            ElevatedButton(
-              onPressed: () {
-                // setState(() {
-                //   selectedButton = 3;
-                // });
-              },
-              child: const Text('Button 3'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      selectedButton = 1; // Update the selectedButton to 1
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: selectedButton == 1 ? Colors.black : Colors.grey,
+                    onPrimary: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      side: BorderSide(
+                        color: selectedButton == 1 ? Colors.white : Colors.grey,
+                      ),
+                    ),
+                  ),
+                  child: const Text('Moto Play'),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      selectedButton = 2; // Update the selectedButton to 2
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: selectedButton == 2 ? Colors.black : Colors.grey,
+                    onPrimary: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      side: BorderSide(
+                        color: selectedButton == 2 ? Colors.white : Colors.grey,
+                      ),
+                    ),
+                  ),
+                  child: const Text('Hay'),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      selectedButton = 3; // Update the selectedButton to 3
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: selectedButton == 3 ? Colors.black : Colors.grey,
+                    onPrimary: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      side: BorderSide(
+                        color: selectedButton == 3 ? Colors.white : Colors.grey,
+                      ),
+                    ),
+                  ),
+                  child: const Text(
+                    'Mañana',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -485,17 +499,18 @@ class _DashboardState extends State<Dashboard> {
             ]),
           ),
         ),
-        posts.isEmpty? CircularProgressIndicator() :
-        Expanded(
-          child: ListView.builder(
-            itemCount: posts.length,
-            itemBuilder: (context, index) { 
-              Map post = posts[index];
-              return ListTile(
-                title: Text(post["title"]),
-                subtitle: Text(post["imageLink"]),
-            );})
-          )
+        posts.isEmpty
+            ? CircularProgressIndicator()
+            : Expanded(
+                child: ListView.builder(
+                    itemCount: posts.length,
+                    itemBuilder: (context, index) {
+                      Map post = posts[index];
+                      return ListTile(
+                        title: Text(post["title"]),
+                        subtitle: Text(post["imageLink"]),
+                      );
+                    }))
         // FutureBuilder(
         //     future: getAllpost(),
         //     builder: ((context, snapshot) {
