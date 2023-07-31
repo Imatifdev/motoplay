@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:motplay/screens/configration.dart';
 import 'package:motplay/screens/dmca.dart';
+import 'package:motplay/screens/donation.dart';
 import 'package:motplay/screens/privacy-policy.dart';
 import 'package:xml/xml.dart';
 import '../test/html_view.dart';
@@ -155,6 +156,10 @@ class _DashboardState extends State<Dashboard> {
               thickness: 0.5,
             ),
             ListTile(
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (ctx) => Donation()));
+              },
               leading: ImageIcon(AssetImage("assets/images/icons7.png")),
               title: Text(
                 "Donación",
