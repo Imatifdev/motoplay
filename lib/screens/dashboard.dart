@@ -1,14 +1,16 @@
-// ignore_for_file: prefer_const_constructors
-
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:html/parser.dart' as htmlParser;
+import 'package:html/dom.dart' hide Text;
 import 'package:blogger_api/blogger_api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:motplay/screens/configration.dart';
 import 'package:motplay/screens/dmca.dart';
-import 'package:motplay/screens/donation.dart';
 import 'package:motplay/screens/privacy-policy.dart';
-import 'package:xml/xml.dart';
+import 'package:xml/xml.dart' as xml;
+import '../models/new_post.dart' hide Image;
+import '../models/post_model.dart'hide Image;
 import '../test/html_view.dart';
 import '../utils/constanst.dart';
 import '../utils/mycolors.dart';
@@ -24,6 +26,31 @@ int selectedButton = 1;
 
 class _DashboardState extends State<Dashboard> {
   List<Map<String, String?>> posts = [];
+  
+  
+  void imgLink() async {
+  // Replace 'your_api_url_here' with the actual API endpoint URL
+  final response = await http.get(Uri.parse('https://www.googleapis.com/blogger/v3/blogs/${blogIds[0]}/posts?key=$key'));
+  final jsonData = jsonDecode(response.body);
+
+  // Access the content field for the first item (assuming there's only one item in 'items')
+  final content = jsonData['items'][0]['content'];
+
+  // Use the html package to parse the HTML content
+  final document = htmlParser.parse(content);
+  final imageElement = document.querySelector('img');
+
+  if (imageElement != null) {
+    // Extract the 'src' attribute to get the image link
+    final imageLink = imageElement.attributes['src'];
+    print(imageLink);
+  } else {
+    print('Image not found in the content.');
+  }
+}
+
+
+
   Future<PostModel> getAllpost() async {
     final res = await BloggerAPI().getAllPostFromBlog(
       includeComment: true,
@@ -33,48 +60,82 @@ class _DashboardState extends State<Dashboard> {
     return res;
   }
 
-  Future<List<Map<String, String?>>> fetchPosts(
-      String blogId, String apiKey) async {
-    print("test 1");
-    String url =
-        'https://www.googleapis.com/blogger/v3/blogs/$blogId/posts?key=$apiKey';
-    //'https://www.googleapis.com/blogger/v3/blogs/$blogId/posts?key=$apiKey';
-    http.Response response = await http.get(Uri.parse(url));
-    print("test 2");
-    // Wrap the XML response with a root element
-    String wrappedXml = '<root>${response.body}</root>';
-    XmlDocument xmlDocument = XmlDocument.parse(wrappedXml);
-    print("test 3");
-    //List<Map<String, String?>> posts = [];
-    Iterable<XmlElement> entries = xmlDocument.findAllElements('entry');
-    print("test 4");
-    entries.forEach((entry) {
-      String? title = entry.findElements('title').first.value;
-      String? content = entry.findElements('content').first.value;
-      String? published = entry.findElements('published').first.value;
-      String? updated = entry.findElements('updated').first.value;
-      String? img = entry.findElements('image').first.getAttribute('url');
-      String url =
-          entry.findElements('link').first.getAttribute('href') as String;
-      Map<String, String?> post = {
-        'title': title,
-        'content': content,
-        'published': published,
-        'updated': updated,
-        'url': url,
-        'img': img
-      };
-      setState(() {
-        posts.add(post);
-        print(post["title"]);
-      });
-    });
-    print("test 5");
-    print(response.body);
-    print("test 6");
-    return posts;
+  Future<Map<String, String?>?> fetchPosts(String blogId, String apiKey) async {
+  String url = 'https://www.googleapis.com/blogger/v3/blogs/$blogId/posts?key=$apiKey';
+  http.Response response = await http.get(Uri.parse(url));
+
+  if (response.statusCode == 200) {
+    Map<String, dynamic> jsonData = jsonDecode(response.body);
+
+    if (jsonData.containsKey('items') && jsonData['items'] is List) {
+      List<dynamic> items = jsonData['items'];
+      for (var item in items) {
+        String? title = item['title'];
+        String? content = item['content'];
+        String? published = item['published'];
+        String? updated = item['updated'];
+
+        // Use the html package to parse the HTML content
+        final document = htmlParser.parse(content);
+        final imageElement = document.querySelector('img');
+        String? imageLink = imageElement?.attributes['src'];
+
+        Map<String, String?> post = {
+          'title': title,
+          'content': content,
+          'published': published,
+          'updated': updated,
+          'imageLink': imageLink, // Add the image link to the map
+        };
+        setState(() {
+          posts.add(post);
+        });
+      }
+
+      return posts[1];
+    } else {
+      // Handle invalid API response
+      print('Invalid API response: items not found');
+    }
+  } else {
+    // Handle HTTP request error
+    print('HTTP request failed with status code: ${response.statusCode}');
   }
 
+  // Return null in case of an error
+  return null;
+}
+//   Future<List<Post>> fetchPosts(String blogId, String apiKey) async {
+//   String url = 'https://www.googleapis.com/blogger/v3/blogs/$blogId/posts?key=$apiKey';
+//   http.Response response = await http.get(Uri.parse(url));
+
+//   if (response.statusCode == 200) {
+//     xml.XmlDocument xmlDocument = xml.XmlDocument.parse(response.body);
+//     Iterable<xml.XmlElement> entries = xmlDocument.findAllElements('entry');
+//     List<Post> posts = entries.map((entry) => Post.fromXml(entry)).toList();
+//     return posts;
+//   } else {
+//     throw Exception('Failed to load posts');
+//   }
+// }
+
+//   void fetchData() async {
+//   // String blogId = 'your_blog_id';
+//   // String apiKey = 'your_api_key';
+//   try {
+//     Post post = (await fetchPosts(blogIds[0], key)) as Post;
+//     // Use the post object here
+//     // For example, you can access the list of items as post.items
+//     post.items.forEach((item) {
+//       print('Title: ${item.title}');
+//       print('Content: ${item.labels}');
+//       // Access other properties as needed
+//     });
+//   } catch (e) {
+//     print('Error: $e');
+//   }
+// }
+  
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -91,10 +152,13 @@ class _DashboardState extends State<Dashboard> {
         elevation: 0,
         title: ElevatedButton(
             onPressed: () async {
-              await fetchPosts(blogIds[0], key);
+             Map? map = await fetchPosts(blogIds[0], key); 
+             print(map!['imageLink']); 
+             print(posts);
               //for(Map post in posts){
-              print(posts);
+              //print(posts);
               //}
+              //imgLink();
             },
             child: const Text("API Call")),
         iconTheme: const IconThemeData(color: Colors.white),
@@ -156,10 +220,6 @@ class _DashboardState extends State<Dashboard> {
               thickness: 0.5,
             ),
             ListTile(
-              onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (ctx) => Donation()));
-              },
               leading: ImageIcon(AssetImage("assets/images/icons7.png")),
               title: Text(
                 "Donación",
@@ -425,60 +485,71 @@ class _DashboardState extends State<Dashboard> {
             ]),
           ),
         ),
-        FutureBuilder(
-            future: getAllpost(),
-            builder: ((context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              }
-              if (snapshot.hasError) {
-                return const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Center(
-                    child: Text('Try Again'),
-                  ),
-                );
-              } else {
-                return Expanded(
-                  child: ListView.builder(
-                      itemCount: snapshot.data!.items!.length,
-                      itemBuilder: (ctx, index) {
-                        return Center(
-                          child: Card(
-                              child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HTMLVIew(
-                                          data: snapshot.data!.items![index],
-                                        )),
-                              );
-                            },
-                            child: Container(
-                                height: 200,
-                                width: double.infinity,
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    // CachedNetworkImage(
-                                    //   imageUrl:snapshot.data!.items![index]. ,
-                                    // ),
-                                    Text(snapshot.data!.items![index].title!),
-                                  ],
-                                )),
-                          )),
-                        );
-                      }),
-                );
-              }
-            })),
+        posts.isEmpty? CircularProgressIndicator() :
+        Expanded(
+          child: ListView.builder(
+            itemCount: posts.length,
+            itemBuilder: (context, index) { 
+              Map post = posts[index];
+              return ListTile(
+                title: Text(post["title"]),
+                subtitle: Text(post["imageLink"]),
+            );})
+          )
+        // FutureBuilder(
+        //     future: getAllpost(),
+        //     builder: ((context, snapshot) {
+        //       if (snapshot.connectionState == ConnectionState.waiting) {
+        //         return const Padding(
+        //           padding: EdgeInsets.all(8.0),
+        //           child: Center(
+        //             child: CircularProgressIndicator(),
+        //           ),
+        //         );
+        //       }
+        //       if (snapshot.hasError) {
+        //         return const Padding(
+        //           padding: EdgeInsets.all(8.0),
+        //           child: Center(
+        //             child: Text('Try Again'),
+        //           ),
+        //         );
+        //       } else {
+        //         return Expanded(
+        //           child: ListView.builder(
+        //               itemCount: snapshot.data!.items!.length,
+        //               itemBuilder: (ctx, index) {
+        //                 return Center(
+        //                   child: Card(
+        //                       child: InkWell(
+        //                     onTap: () {
+        //                       Navigator.push(
+        //                         context,
+        //                         MaterialPageRoute(
+        //                             builder: (context) => HTMLVIew(
+        //                                   data: snapshot.data!.items![index],
+        //                                 )),
+        //                       );
+        //                     },
+        //                     child: Container(
+        //                         height: 200,
+        //                         width: double.infinity,
+        //                         padding: const EdgeInsets.all(8.0),
+        //                         child: Column(
+        //                           mainAxisAlignment: MainAxisAlignment.center,
+        //                           children: [
+        //                             // CachedNetworkImage(
+        //                             //   imageUrl:snapshot.data!.items![index]. ,
+        //                             // ),
+        //                             Text(snapshot.data!.items![index].title!),
+        //                           ],
+        //                         )),
+        //                   )),
+        //                 );
+        //               }),
+        //         );
+        //       }
+        //     })),
       ]),
     );
   }
