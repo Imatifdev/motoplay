@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'Moto Play',
       theme: ThemeData(
         fontFamily: GoogleFonts.teko().fontFamily,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
       home: const Dashboard(),
