@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:motplay/utils/mycolors.dart';
 
+import '../utils/custom_drawer.dart';
+
 class Configration extends StatelessWidget {
   const Configration({super.key});
 
@@ -23,7 +25,7 @@ class Configration extends StatelessWidget {
         ),
         iconTheme: IconThemeData(color: Colors.grey.shade200),
       ),
-      drawer: Drawer(),
+      drawer: CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

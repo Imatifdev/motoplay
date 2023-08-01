@@ -8,12 +8,12 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 import 'blog_detail_screen.dart';
 
-class MotoGp extends StatefulWidget {
+class F1Screen extends StatefulWidget {
   @override
-  State<MotoGp> createState() => _MotoGpState();
+  State<F1Screen> createState() => _F1ScreenState();
 }
 
-class _MotoGpState extends State<MotoGp> {
+class _F1ScreenState extends State<F1Screen> {
   List<Map<String, String?>> f1List = [];
   bool isLoading = false;
 
@@ -56,7 +56,7 @@ class _MotoGpState extends State<MotoGp> {
           };
 
           setState(() {
-            if (title != null && title.contains('GP')) {
+            if (title != null && title.contains('F1')) {
               f1List.add(post);
             }
             isLoading = false;
@@ -84,7 +84,7 @@ class _MotoGpState extends State<MotoGp> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Moto GP Blogs'),
+        title: Text('F1 Blogs'),
       ),
       body: isLoading
           ? const Center(
@@ -104,7 +104,7 @@ class _MotoGpState extends State<MotoGp> {
 
   Widget blogListWidget(double screenWidth, List<Map<String, String?>> blogs) {
     return SizedBox(
-      height: 1000,
+      height: (300 * blogs.length).toDouble(),
       width: screenWidth - 5,
       child: ListView.builder(
         scrollDirection: Axis.vertical,
@@ -125,7 +125,7 @@ class _MotoGpState extends State<MotoGp> {
               },
               child: Container(
                 height: 300,
-                width: screenWidth - 5,
+                width: screenWidth - 10,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -145,12 +145,13 @@ class _MotoGpState extends State<MotoGp> {
                     Positioned(
                       bottom: 0,
                       child: Container(
-                        width: screenWidth,
+                        width: screenWidth - 20,
                         height: 60,
                         color: Colors.black.withOpacity(0.5),
                         child: Center(
                           child: Text(
                             post["title"] ?? '',
+                            softWrap: true,
                             textAlign: TextAlign.center,
                             style: TextStyle(color: Colors.white, fontSize: 20),
                           ),
