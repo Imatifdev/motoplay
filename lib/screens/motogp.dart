@@ -4,6 +4,9 @@ import 'package:html/parser.dart' as htmlParser;
 import 'package:blogger_api/blogger_api.dart';
 import 'package:flutter/material.dart';
 import 'package:motplay/utils/constanst.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+
+import 'blog_detail_screen.dart';
 
 class MotoGp extends StatefulWidget {
   @override
@@ -151,40 +154,3 @@ class _MotoGpState extends State<MotoGp> {
 }
 // ... (rest of the code)
 
-class BlogDetailsScreen extends StatelessWidget {
-  final Map<String, String?> post;
-
-  BlogDetailsScreen({required this.post});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(post["title"] ?? ''),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              if (post["imageLink"] != null)
-                Image.network(
-                  post["imageLink"]!,
-                  height: 200,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-              SizedBox(height: 16),
-              Text(
-                post["title"] ?? '',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 8),
-              Text(post["content"] ?? ''),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
