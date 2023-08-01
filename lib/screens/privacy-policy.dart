@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:motplay/utils/mycolors.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/custom_drawer.dart';
 
@@ -8,18 +7,18 @@ class PrivacyPolicyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
       appBar: AppBar(
         backgroundColor: blue,
-        title: Text(
+        title: const Text(
           'Política de Privacidad',
           style: TextStyle(fontSize: 32),
         ),
         iconTheme: IconThemeData(color: Colors.grey.shade200),
       ),
       body: ListView(
-        padding: EdgeInsets.all(16.0),
-        children: [
+        padding: const EdgeInsets.all(16.0),
+        children: const [
           Text(
             "Política de Privacidad y Contenido",
             style: TextStyle(fontSize: 24, color: blue),

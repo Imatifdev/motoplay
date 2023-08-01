@@ -1,10 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as htmlParser;
-import 'package:blogger_api/blogger_api.dart';
 import 'package:flutter/material.dart';
 import 'package:motplay/utils/constanst.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 import 'blog_detail_screen.dart';
 

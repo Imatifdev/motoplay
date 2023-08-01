@@ -3,8 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motplay/screens/dashboard.dart';
-import 'package:motplay/screens/events_screen.dart';
-import 'package:motplay/screens/motogp.dart';
 
 void main() {
   runApp(const MyApp());
