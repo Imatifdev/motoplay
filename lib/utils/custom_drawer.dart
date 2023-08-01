@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:motplay/screens/all_blogs.dart';
+import 'package:motplay/screens/events_screen.dart';
 import 'package:motplay/screens/f1_screen.dart';
 import 'package:motplay/screens/motogp.dart';
 
@@ -51,38 +53,38 @@ class CustomDrawer extends StatelessWidget {
               style: TextStyle(fontSize: 23, color: blue),
             ),
           ),
-          const Divider(
-            height: 0,
-            thickness: 0.5,
-          ),
-          ListTile(
-            leading: const Icon(Icons.drive_eta_rounded),
-            title: const Text(
-              "F1",
-              style: TextStyle(fontSize: 23, color: blue),
-            ),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => F1Screen(),
-              ));
-            },
-          ),
-          const Divider(
-            height: 0,
-            thickness: 0.5,
-          ),
-          ListTile(
-            leading: const Icon(Icons.drive_eta_outlined),
-            title: const Text(
-              "Moto GP",
-              style: TextStyle(fontSize: 23, color: blue),
-            ),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => MotoGp(),
-              ));
-            },
-          ),
+          // const Divider(
+          //   height: 0,
+          //   thickness: 0.5,
+          // ),
+          // ListTile(
+          //   leading: const Icon(Icons.drive_eta_rounded),
+          //   title: const Text(
+          //     "F1",
+          //     style: TextStyle(fontSize: 23, color: blue),
+          //   ),
+          //   onTap: () {
+          //     Navigator.of(context).push(MaterialPageRoute(
+          //       builder: (context) => F1Screen(),
+          //     ));
+          //   },
+          // ),
+          // const Divider(
+          //   height: 0,
+          //   thickness: 0.5,
+          // ),
+          // ListTile(
+          //   leading: const Icon(Icons.drive_eta_outlined),
+          //   title: const Text(
+          //     "Moto GP",
+          //     style: TextStyle(fontSize: 23, color: blue),
+          //   ),
+          //   onTap: () {
+          //     Navigator.of(context).push(MaterialPageRoute(
+          //       builder: (context) => MotoGp(),
+          //     ));
+          //   },
+          // ),
           const Divider(
             height: 0,
             thickness: 0.5,
@@ -103,8 +105,8 @@ class CustomDrawer extends StatelessWidget {
             thickness: 0.5,
           ),
           ListTile(
-            leading: ImageIcon(AssetImage("assets/images/icons7.png")),
-            title: Text(
+            leading: const ImageIcon(AssetImage("assets/images/icons7.png")),
+            title: const Text(
               "Donación",
               style: TextStyle(fontSize: 23, color: blue),
             ),
@@ -118,42 +120,62 @@ class CustomDrawer extends StatelessWidget {
             height: 0,
             thickness: 0.5,
           ),
-          const ListTile(
-            leading: ImageIcon(AssetImage("assets/images/icon3.png")),
-            title: Text(
+          ListTile(
+            leading: const ImageIcon(AssetImage("assets/images/icon3.png")),
+            title: const Text(
               "Repeticiones f1ss",
               style: TextStyle(fontSize: 23, color: blue),
             ),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => F1Screen(),
+              ));
+            },
           ),
           const Divider(
             height: 0,
             thickness: 0.5,
           ),
-          const ListTile(
-            leading: ImageIcon(AssetImage("assets/images/icon3.png")),
-            title: Text(
+          ListTile(
+            leading: const ImageIcon(AssetImage("assets/images/icon3.png")),
+            title: const Text(
               "Repeticiones  MotoGP",
               style: TextStyle(fontSize: 23, color: blue),
             ),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => MotoGp(),
+              ));
+            },
           ),
           const Divider(
             height: 0,
             thickness: 0.5,
           ),
-          const ListTile(
-            leading: Icon(Icons.restore_outlined),
-            title: Text(
+          ListTile(
+            leading: const Icon(Icons.restore_outlined),
+            title: const Text(
               "Últimas Actualizaciones",
               style: TextStyle(fontSize: 23, color: blue),
             ),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => AllBlogs(),
+              ));
+            },
           ),
           const Divider(
             height: 0,
             thickness: 0.5,
           ),
-          const ListTile(
-            leading: ImageIcon(AssetImage("assets/images/icon1.png")),
-            title: Text(
+          ListTile(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const EventsScreen(),
+              ));
+            },
+            leading: const ImageIcon(AssetImage("assets/images/icon1.png")),
+            title: const Text(
               "Redes Sociales",
               style: TextStyle(fontSize: 23, color: blue),
             ),
