@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../utils/custom_drawer.dart';
 import '../utils/mycolors.dart';
 
 class DMCA extends StatelessWidget {
@@ -7,7 +8,7 @@ class DMCA extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        drawer: Drawer(),
+        drawer: CustomDrawer(),
         appBar: AppBar(
           backgroundColor: blue,
           title: Text(

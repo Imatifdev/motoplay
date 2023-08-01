@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:motplay/utils/mycolors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../utils/custom_drawer.dart';
+
 class PrivacyPolicyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
+      drawer: CustomDrawer(),
       appBar: AppBar(
         backgroundColor: blue,
         title: Text(

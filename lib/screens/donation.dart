@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:motplay/utils/mycolors.dart';
 
+import '../utils/custom_drawer.dart';
+
 class Donation extends StatefulWidget {
   const Donation({super.key});
 
@@ -30,6 +32,7 @@ class _DonationState extends State<Donation> {
         ),
         iconTheme: IconThemeData(color: Colors.grey.shade200),
       ),
+      drawer: CustomDrawer(),
       body: SingleChildScrollView(
         child: Column(
           children: [

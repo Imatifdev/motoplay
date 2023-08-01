@@ -10,6 +10,7 @@ import 'package:motplay/screens/donation.dart';
 import 'package:motplay/screens/privacy-policy.dart';
 import '../test/html_view.dart';
 import '../utils/constanst.dart';
+import '../utils/custom_drawer.dart';
 import '../utils/mycolors.dart';
 import 'blog_detail_screen.dart';
 
@@ -117,197 +118,20 @@ class _DashboardState extends State<Dashboard> {
       appBar: AppBar(
         backgroundColor: blue,
         elevation: 0,
-        title: ElevatedButton(
-            onPressed: () async {
-              Map? map = await fetchPosts(blogIds[0], key);
-              print(map!['imageLink']);
-              print(posts);
-              //for(Map post in posts){
-              //print(posts);
-              //}
-              //imgLink();
-            },
-            child: const Text("API Call")),
+        // title: ElevatedButton(
+        //     onPressed: () async {
+        //       Map? map = await fetchPosts(blogIds[0], key);
+        //       print(map!['imageLink']);
+        //       print(posts);
+        //       //for(Map post in posts){
+        //       //print(posts);
+        //       //}
+        //       //imgLink();
+        //     },
+        //     child: const Text("API Call")),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      drawer: Drawer(
-        backgroundColor: Colors.white,
-        child: ListView(
-          scrollDirection: Axis.vertical,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    "MOTOPLAY",
-                    style: TextStyle(fontSize: 31, color: Colors.black),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(
-                      CupertinoIcons.left_chevron,
-                      size: 30,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              color: blue,
-              height: 20,
-            ),
-            const ListTile(
-              leading: Icon(Icons.home),
-              title: Text(
-                "Home",
-                style: TextStyle(fontSize: 23, color: blue),
-              ),
-            ),
-            const Divider(
-              height: 0,
-              thickness: 0.5,
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (ctx) => const Configration()));
-              },
-              leading: const Icon(Icons.settings),
-              title: const Text(
-                "Configration",
-                style: TextStyle(fontSize: 23, color: blue),
-              ),
-            ),
-            const Divider(
-              height: 0,
-              thickness: 0.5,
-            ),
-            ListTile(
-              leading: ImageIcon(AssetImage("assets/images/icons7.png")),
-              title: Text(
-                "Donación",
-                style: TextStyle(fontSize: 23, color: blue),
-              ),
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const Donation(),
-                ));
-              },
-            ),
-            const Divider(
-              height: 0,
-              thickness: 0.5,
-            ),
-            const ListTile(
-              leading: ImageIcon(AssetImage("assets/images/icon3.png")),
-              title: Text(
-                "Repeticiones f1ss",
-                style: TextStyle(fontSize: 23, color: blue),
-              ),
-            ),
-            const Divider(
-              height: 0,
-              thickness: 0.5,
-            ),
-            const ListTile(
-              leading: ImageIcon(AssetImage("assets/images/icon3.png")),
-              title: Text(
-                "Repeticiones  MotoGP",
-                style: TextStyle(fontSize: 23, color: blue),
-              ),
-            ),
-            const Divider(
-              height: 0,
-              thickness: 0.5,
-            ),
-            const ListTile(
-              leading: Icon(Icons.restore_outlined),
-              title: Text(
-                "Últimas Actualizaciones",
-                style: TextStyle(fontSize: 23, color: blue),
-              ),
-            ),
-            const Divider(
-              height: 0,
-              thickness: 0.5,
-            ),
-            const ListTile(
-              leading: ImageIcon(AssetImage("assets/images/icon1.png")),
-              title: Text(
-                "Redes Sociales",
-                style: TextStyle(fontSize: 23, color: blue),
-              ),
-            ),
-            const Divider(
-              height: 0,
-              thickness: 0.5,
-            ),
-            const ListTile(
-              leading: Icon(Icons.notification_important_outlined),
-              title: Text(
-                "Configurar las Notificaciones",
-                style: TextStyle(fontSize: 23, color: blue),
-              ),
-            ),
-            const Divider(
-              height: 0,
-              thickness: 0.5,
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (ctx) => PrivacyPolicyScreen()));
-              },
-              leading: const ImageIcon(AssetImage("assets/images/icon2.png")),
-              title: const Text(
-                "Politicas de Privacidad",
-                style: TextStyle(fontSize: 23, color: blue),
-              ),
-            ),
-            const Divider(
-              height: 0,
-              thickness: 0.5,
-            ),
-            const ListTile(
-              leading: Icon(Icons.screen_share_rounded),
-              title: Text(
-                "Comparitir App",
-                style: TextStyle(fontSize: 23, color: blue),
-              ),
-            ),
-            const Divider(
-              height: 0,
-              thickness: 0.5,
-            ),
-            const ListTile(
-              leading: ImageIcon(AssetImage("assets/images/icon5.png")),
-              title: Text(
-                "Acerca de la App",
-                style: TextStyle(fontSize: 23, color: blue),
-              ),
-            ),
-            const Divider(
-              height: 0,
-              thickness: 0.5,
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (ctx) => DMCA()));
-              },
-              leading: const ImageIcon(AssetImage("assets/images/icon4.png")),
-              title: const Text(
-                "DMCA ",
-                style: TextStyle(fontSize: 23, color: blue),
-              ),
-            ),
-          ],
-        ),
-      ),
+      drawer: CustomDrawer(),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(children: [
