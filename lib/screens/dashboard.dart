@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:motplay/screens/configration.dart';
 import 'package:motplay/screens/dmca.dart';
+import 'package:motplay/screens/donation.dart';
 import 'package:motplay/screens/privacy-policy.dart';
 import '../test/html_view.dart';
 import '../utils/constanst.dart';
@@ -184,12 +185,15 @@ class _DashboardState extends State<Dashboard> {
               height: 0,
               thickness: 0.5,
             ),
-            const ListTile(
+            ListTile(
               leading: ImageIcon(AssetImage("assets/images/icons7.png")),
               title: Text(
                 "Donación",
                 style: TextStyle(fontSize: 23, color: blue),
               ),
+              onTap: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Donation(),));
+              },
             ),
             const Divider(
               height: 0,
@@ -615,7 +619,7 @@ class _DashboardState extends State<Dashboard> {
   SizedBox blogListWidget(double screenWidth, List<Map<String, String?>> blogs) {
   return SizedBox(
     height: 300,
-    width: screenWidth - 30,
+    width: screenWidth - 5,
     child: ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: blogs.length,
@@ -656,7 +660,7 @@ class _DashboardState extends State<Dashboard> {
                   },
                   child: Container(
                     height: 300,
-                    width: screenWidth - 10,
+                    width: screenWidth - 5,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                     ),

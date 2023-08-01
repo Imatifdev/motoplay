@@ -24,7 +24,7 @@ class _DonationState extends State<Donation> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: Text(
+        title: const Text(
           "Donación",
           style: TextStyle(fontSize: 32),
         ),
@@ -33,20 +33,20 @@ class _DonationState extends State<Donation> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Image(
               fit: BoxFit.contain,
               height: screenHeight * 0.3,
               width: screenWidth,
-              image: AssetImage('assets/images/donation.png'),
+              image: const AssetImage('assets/images/donation.png'),
             ),
-            Text(
+            const Text(
               "Dona para las niñas a su bienestar",
               style: TextStyle(fontSize: 30),
             ),
-            Text(
+            const Text(
               "Fundación de caridad",
               style: TextStyle(fontSize: 32, color: Colors.blue),
             ),
@@ -154,13 +154,13 @@ class _DonationState extends State<Donation> {
             SizedBox(
               height: screenHeight * 0.02,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
                   Expanded(child: Divider()),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Text("O"),
                   ),
                   Expanded(child: Divider())
@@ -174,7 +174,7 @@ class _DonationState extends State<Donation> {
                 color: Colors.grey.shade400,
                 borderRadius: BorderRadius.circular(05),
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   "Introducir precio manualmente",
                   style: TextStyle(fontSize: 22),
@@ -192,7 +192,7 @@ class _DonationState extends State<Donation> {
                   color: blue,
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Center(
+                child: const Center(
                   child: Text(
                     "Done Ahora",
                     style: TextStyle(fontSize: 22, color: Colors.white),
