@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motplay/screens/dashboard.dart';
-import 'package:motplay/screens/motogp.dart';
 import 'package:motplay/screens/splash_screen.dart';
 
 void main() {
@@ -24,7 +23,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const SplashScreen(),
+      home: SplashScreen(),
+      routes: {
+        Dashboard.routeName: (ctx) => const Dashboard(),
+      },
     );
   }
 }

@@ -10,6 +10,7 @@ import '../utils/mycolors.dart';
 import 'blog_detail_screen.dart';
 
 class Dashboard extends StatefulWidget {
+  static const routeName = "/nextScreen";
   const Dashboard({super.key});
 
   @override
