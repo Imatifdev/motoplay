@@ -10,11 +10,11 @@ class Configration extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    final textScaleFactor = MediaQuery.of(context).textScaleFactor;
+    //final textScaleFactor = MediaQuery.of(context).textScaleFactor;
     // Adjust font size based on screen width and text scale factor
     //final fontSize = screenWidth * 0.14 * textScaleFactor;
     //final subheading = screenWidth * 0.07 * textScaleFactor;
-    final heading = screenWidth * 0.14 * textScaleFactor;
+    //final heading = screenWidth * 0.14 * textScaleFactor;
 
     return Scaffold(
       appBar: AppBar(

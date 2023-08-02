@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'Moto Play',
       theme: ThemeData(
         fontFamily: GoogleFonts.teko().fontFamily,
+        //pri
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),

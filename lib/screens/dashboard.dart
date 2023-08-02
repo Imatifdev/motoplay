@@ -4,17 +4,13 @@ import 'package:html/parser.dart' as htmlParser;
 import 'package:blogger_api/blogger_api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:motplay/screens/configration.dart';
-import 'package:motplay/screens/dmca.dart';
-import 'package:motplay/screens/donation.dart';
-import 'package:motplay/screens/privacy-policy.dart';
-import '../test/html_view.dart';
 import '../utils/constanst.dart';
 import '../utils/custom_drawer.dart';
 import '../utils/mycolors.dart';
 import 'blog_detail_screen.dart';
 
 class Dashboard extends StatefulWidget {
+  static const routeName = "/nextScreen";
   const Dashboard({super.key});
 
   @override
