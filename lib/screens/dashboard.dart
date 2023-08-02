@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as htmlParser;
 import 'package:blogger_api/blogger_api.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../utils/constanst.dart';
 import '../utils/custom_drawer.dart';
@@ -127,7 +128,7 @@ class _DashboardState extends State<Dashboard> {
         //     child: const Text("API Call")),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(children: [
@@ -464,8 +465,14 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Widget blogListWidget(double screenWidth, List<Map<String, String?>> blogs) {
-    return SizedBox(
-      height: 300,
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [gradBlue,gradOrange]),
+      ),
+      height: 500,
       width: screenWidth - 5,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -474,8 +481,9 @@ class _DashboardState extends State<Dashboard> {
           Map<String, String?> post =
               blogs[index]; // Explicitly cast to Map<String, String?>
           return Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 8),
             child: InkWell(
+              
               onTap: () {
                 Navigator.push(
                   context,
@@ -485,35 +493,44 @@ class _DashboardState extends State<Dashboard> {
                 );
               },
               child: Container(
-                height: 300,
-                width: screenWidth - 5,
+                //height: 400,
+                width: screenWidth /1.5,
                 decoration: BoxDecoration(
+                  
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Stack(
                   children: [
                     Positioned(
                       top: 0,
-                      child: SizedBox(
-                        height: 300,
-                        width: screenWidth,
-                        child: Image.network(
-                          post["imageLink"] ?? '',
-                          fit: BoxFit.cover,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25)
+                        ),
+                        height: 450,
+                       //width: ,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(25),
+                          child: CachedNetworkImage(
+                           imageUrl: post["imageLink"] ?? '',
+                           placeholder: (context, url) => const CircularProgressIndicator(),
+                           errorWidget: (context, url, error) => const Icon(Icons.error),
+                           fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
                     Positioned(
                       bottom: 0,
                       child: Container(
-                        width: screenWidth,
+                        width: screenWidth/1.5,
                         height: 60,
                         color: Colors.black.withOpacity(0.5),
                         child: Center(
                           child: Text(
                             post["title"] ?? '',
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white, fontSize: 20),
+                            style: const TextStyle(color: Colors.white, fontSize: 20),
                           ),
                         ),
                       ),
