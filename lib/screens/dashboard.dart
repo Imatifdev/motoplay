@@ -132,6 +132,191 @@ class _DashboardState extends State<Dashboard> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(children: [
+            SizedBox(
+  height: 400,
+  width: 500,
+  child: Row(
+    children: [
+      Expanded(
+        child: Stack(
+          alignment: Alignment.topCenter,
+          children: [
+            Positioned(
+              bottom: 20,
+              left:-60,
+              child: Image.asset(
+                'assets/images/bg.png',
+                height: 400,
+              ),
+            ),
+            Positioned(
+              left: 20,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      print("ok");
+                    },
+                    child: CircleAvatar(
+                      radius: 35,
+                      backgroundColor: Colors.white,
+                      child: Card(
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: const CircleAvatar(
+                          radius: 32,
+                          backgroundColor: Colors.white,
+                          child: Text("MotoPlay"),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 60), // Adjust spacing between avatars
+                  InkWell(
+                    onTap: () {
+                      print("ok");
+                    },
+                    child: CircleAvatar(
+                      radius: 35,
+                      backgroundColor: Colors.white,
+                      child: Card(
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: const CircleAvatar(
+                          radius: 32,
+                          backgroundColor: Color(0xff005796),
+                          child: Text(
+                            "Hay",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 60), // Adjust spacing between avatars
+                  InkWell(
+                    onTap: () {
+                      print('ok');
+                    },
+                    child: CircleAvatar(
+                      radius: 35,
+                      backgroundColor: Colors.white,
+                      child: Card(
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: const CircleAvatar(
+                          radius: 32,
+                          backgroundColor: Colors.white,
+                          child: Text("Mañana"),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      Padding(
+        padding:  const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            const Text("Indycar Por NodoSports", style: TextStyle(fontSize: 29, color: gradBlue),),
+            Container(
+              height: 300,
+              width: 250,
+              decoration: BoxDecoration(
+                color: gradBlue,
+                borderRadius: BorderRadius.circular(20)
+              ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                          children: [
+                            Image.asset("assets/images/gun.png"),
+                            const Text(
+                              "Carrera",
+                              style: TextStyle(fontSize: 21, color: Colors.white),
+                            )
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                          children: [
+                            Image.asset("assets/images/f1.png"),
+                            const Text(
+                              "GB Hungria",
+                              style: TextStyle(fontSize: 21, color: Colors.white),
+                            )
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Image.asset("assets/images/txt.png", color: gradOrange,),
+                            const SizedBox(height: 10),
+                            const Text(
+                              "Finalizado",
+                              style: TextStyle(fontSize: 21, color: Colors.white),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                    width: 20,
+                    height: 100,
+                    color: Colors.white,
+                    padding: const EdgeInsets.all(5),
+                  ),
+                  const SizedBox(width:5),
+                  Container(
+                    width: 20,
+                    height: 100,
+                    color: Colors.white,
+                    padding: const EdgeInsets.all(5)
+                  ),
+                  const SizedBox(width:5),
+                  Container(
+                    width: 20,
+                    height: 100,
+                    color: Colors.white,
+                    padding: const EdgeInsets.all(5)
+                  ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      )
+    ],
+  ),
+),
+
+        
             Container(
               width: screenWidth,
               height: screenHeight * 0.12,

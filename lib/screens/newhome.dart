@@ -10,7 +10,7 @@ class NewHome extends StatelessWidget {
         children: [
           Expanded(
             child: Stack(
-              alignment: Alignment.center,
+              alignment: Alignment.topCenter,
               children: [
                 Positioned(
                     right: 330,
@@ -24,50 +24,65 @@ class NewHome extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      CircleAvatar(
-                        radius: 35,
-                        backgroundColor: Colors.white,
-                        child: Card(
-                          elevation: 10,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50)),
-                          child: CircleAvatar(
-                            radius: 32,
-                            backgroundColor: Colors.white,
-                            child: Text("MotoPlay"),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 60), // Adjust spacing between avatars
-                      CircleAvatar(
-                        radius: 35,
-                        backgroundColor: Colors.white,
-                        child: Card(
-                          elevation: 10,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50)),
-                          child: CircleAvatar(
-                            radius: 32,
-                            backgroundColor: Color(0xff005796),
-                            child: Text(
-                              "Hay",
-                              style: TextStyle(color: Colors.white),
+                      InkWell(
+                        onTap: (){
+                          print("ok");
+                        },
+                        child: CircleAvatar(
+                          radius: 35,
+                          backgroundColor: Colors.white,
+                          child: Card(
+                            elevation: 10,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
+                            child: const CircleAvatar(
+                              radius: 32,
+                              backgroundColor: Colors.white,
+                              child: Text("MotoPlay"),
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(height: 60), // Adjust spacing between avatars
-                      CircleAvatar(
-                        radius: 35,
-                        backgroundColor: Colors.white,
-                        child: Card(
-                          elevation: 10,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50)),
-                          child: CircleAvatar(
-                            radius: 32,
-                            backgroundColor: Colors.white,
-                            child: Text("Mañana"),
+                      const SizedBox(height: 60), // Adjust spacing between avatars
+                      InkWell(
+                        onTap: (){
+                          print("ok");
+                        },
+                        child: CircleAvatar(
+                          radius: 35,
+                          backgroundColor: Colors.white,
+                          child: Card(
+                            elevation: 10,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
+                            child: const CircleAvatar(
+                              radius: 32,
+                              backgroundColor: Color(0xff005796),
+                              child: Text(
+                                "Hay",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 60), // Adjust spacing between avatars
+                      InkWell(
+                        onTap: () {
+                          print('ok');
+                        },
+                        child: CircleAvatar(
+                          radius: 35,
+                          backgroundColor: Colors.white,
+                          child: Card(
+                            elevation: 10,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
+                            child: const CircleAvatar(
+                              radius: 32,
+                              backgroundColor: Colors.white,
+                              child: Text("Mañana"),
+                            ),
                           ),
                         ),
                       ),
