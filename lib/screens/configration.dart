@@ -21,13 +21,13 @@ class Configration extends StatelessWidget {
         backgroundColor: blue,
         title: Text(
           "Configuracion",
-          style: TextStyle(fontSize: 32),
+          style: TextStyle(fontSize: 32, color: Colors.white),
         ),
-        iconTheme: IconThemeData(color: Colors.grey.shade200),
+        iconTheme: IconThemeData(color: Color(0xff005796)),
       ),
       drawer: CustomDrawer(),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(0.0),
         child: Column(
           children: [
             SizedBox(
@@ -36,13 +36,13 @@ class Configration extends StatelessWidget {
             Card(
               elevation: 10,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50)),
+                  borderRadius: BorderRadius.circular(0)),
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    borderRadius: BorderRadius.circular(50)),
+                    color: Color(0xff005796),
+                    borderRadius: BorderRadius.circular(0)),
                 height: screenHeight * 0.07,
-                width: screenWidth / 2,
+                width: screenWidth,
                 child: Row(
                   children: [
                     Image.asset(
@@ -52,7 +52,7 @@ class Configration extends StatelessWidget {
                     ),
                     Text(
                       "Limpiar Cache",
-                      style: TextStyle(fontSize: 27),
+                      style: TextStyle(fontSize: 27, color: Colors.white),
                     )
                   ],
                 ),
@@ -64,13 +64,13 @@ class Configration extends StatelessWidget {
             Card(
               elevation: 10,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50)),
+                  borderRadius: BorderRadius.circular(00)),
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    borderRadius: BorderRadius.circular(50)),
+                    color: Color(0xff005796),
+                    borderRadius: BorderRadius.circular(00)),
                 height: screenHeight * 0.07,
-                width: screenWidth / 2,
+                width: screenWidth,
                 child: Row(
                   children: [
                     Image.asset(
@@ -80,7 +80,7 @@ class Configration extends StatelessWidget {
                     ),
                     Text(
                       "Modo Oscuro",
-                      style: TextStyle(fontSize: 27),
+                      style: TextStyle(fontSize: 27, color: Colors.white),
                     )
                   ],
                 ),
@@ -92,13 +92,13 @@ class Configration extends StatelessWidget {
             Card(
               elevation: 10,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50)),
+                  borderRadius: BorderRadius.circular(00)),
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    borderRadius: BorderRadius.circular(50)),
+                    color: Color(0xff005796),
+                    borderRadius: BorderRadius.circular(00)),
                 height: screenHeight * 0.07,
-                width: screenWidth / 2,
+                width: screenWidth,
                 child: Row(
                   children: [
                     Image.asset(
@@ -108,7 +108,7 @@ class Configration extends StatelessWidget {
                     ),
                     Text(
                       "Modo de Luz",
-                      style: TextStyle(fontSize: 27),
+                      style: TextStyle(fontSize: 27, color: Colors.white),
                     )
                   ],
                 ),
