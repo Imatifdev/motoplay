@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motplay/screens/dashboard.dart';
-import 'package:motplay/screens/f1_screen.dart';
 import 'package:motplay/screens/splash_screen.dart';
 import 'package:motplay/utils/custom_appbar.dart';
 

@@ -124,345 +124,332 @@ class _DashboardState extends State<Dashboard> {
         child: SafeArea(
           child: Column(children: [
             SizedBox(
-              height: 500,
+              height: 150,
+              child: Stack(children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 100,
+                        width: screenWidth * 0.8,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage('assets/images/newbox.png')),
+                            borderRadius: BorderRadius.circular(20)),
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  top: 60,
+                  left: 70,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      CircleAvatar(
+                        radius: 40,
+                      ),
+                      SizedBox(
+                        width: 30,
+                      ),
+                      CircleAvatar(
+                        radius: 40,
+                      ),
+                    ],
+                  ),
+                )
+              ]),
+            ),
+            SizedBox(
+              height: 300,
               width: 500,
               child: Column(
                 children: [
-                  Align(
-                    alignment: Alignment.center,
-                    child: Stack(
-                      children: [
-                        Image(
-                          height: 100,
-                          width: 300,
-                          image: AssetImage("assets/images/newbox.png"),
-                        ),
-                        Positioned(
-                          left: 75, // Adjust the position as needed
-                          top: 25, // Adjust the position as needed
-                          child: ClipRect(
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              widthFactor: 0.5,
-                              child: CircleAvatar(
-                                radius: 25,
-                                backgroundImage:
-                                    AssetImage("assets/images/f1.png"),
-                              ),
+                  SizedBox(
+                    height: 300,
+                    child: Stack(children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            const Text(
+                              "Indycar Por NodoSports",
+                              style: TextStyle(fontSize: 29, color: gradBlue),
                             ),
-                          ),
-                        ),
-                        Positioned(
-                          left: 150, // Adjust the position as needed
-                          top: 25, // Adjust the position as needed
-                          child: ClipRect(
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              widthFactor: 0.5,
-                              child: CircleAvatar(
-                                radius: 25,
-                                backgroundImage:
-                                    AssetImage("assets/images/f1.png"),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-
-                  // Expanded(
-                  //   child:
-                  //       // Positioned(
-                  //       //   bottom: 20,
-                  //       //   left: 0,
-                  //       //   child: Image.asset(
-                  //       //     'assets/images/newbox.png',
-                  //       //     height: 400,
-                  //       //   ),
-                  //       // ),
-                  //       // Positioned(
-                  //       //   left: 20,
-                  //       //   child: Column(
-                  //       //     mainAxisAlignment: MainAxisAlignment.center,
-                  //       //     crossAxisAlignment: CrossAxisAlignment.center,
-                  //       //     children: [
-                  //       //       const SizedBox(
-                  //       //           height: 60), // Adjust spacing between avatars
-                  //       //       InkWell(
-                  //       //         onTap: () {
-                  //       //           print("ok");
-                  //       //         },
-                  //       //         child: CircleAvatar(
-                  //       //           radius: 35,
-                  //       //           backgroundColor: Colors.white,
-                  //       //           child: Card(
-                  //       //             elevation: 10,
-                  //       //             shape: RoundedRectangleBorder(
-                  //       //               borderRadius: BorderRadius.circular(50),
-                  //       //             ),
-                  //       //             child: const CircleAvatar(
-                  //       //               radius: 32,
-                  //       //               backgroundColor: Color(0xff005796),
-                  //       //               child: Text(
-                  //       //                 "Hay",
-                  //       //                 style: TextStyle(color: Colors.white),
-                  //       //               ),
-                  //       //             ),
-                  //       //           ),
-                  //       //         ),
-                  //       //       ),
-                  //       //       const SizedBox(
-                  //       //           height: 60), // Adjust spacing between avatars
-                  //       //       InkWell(
-                  //       //         onTap: () {
-                  //       //           print('ok');
-                  //       //         },
-                  //       //         child: CircleAvatar(
-                  //       //           radius: 35,
-                  //       //           backgroundColor: Colors.white,
-                  //       //           child: Card(
-                  //       //             elevation: 10,
-                  //       //             shape: RoundedRectangleBorder(
-                  //       //               borderRadius: BorderRadius.circular(50),
-                  //       //             ),
-                  //       //             child: const CircleAvatar(
-                  //       //               radius: 32,
-                  //       //               backgroundColor: Colors.white,
-                  //       //               child: Text("Mañana"),
-                  //       //             ),
-                  //       //           ),
-                  //       //         ),
-                  //       //       ),
-                  //       //     ],
-                  //       //   ),
-                  //       // ),
-
-                  // ),
-                  ,
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        const Text(
-                          "Indycar Por NodoSports",
-                          style: TextStyle(fontSize: 29, color: gradBlue),
-                        ),
-                        Container(
-                          height: 300,
-                          width: 250,
-                          decoration: BoxDecoration(
-                              color: gradBlue,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
+                            Container(
+                              height: 100,
+                              width: screenWidth * 0.8,
+                              decoration: BoxDecoration(
+                                  color: gradBlue,
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Image.asset("assets/images/gun.png"),
-                                        const Text(
-                                          "Carrera",
-                                          style: TextStyle(
-                                              fontSize: 21,
-                                              color: Colors.white),
-                                        )
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Image.asset("assets/images/f1.png"),
-                                        const Text(
-                                          "GB Hungria",
-                                          style: TextStyle(
-                                              fontSize: 21,
-                                              color: Colors.white),
-                                        )
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Image.asset(
-                                          "assets/images/txt.png",
-                                          color: gradOrange,
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Image.asset(
+                                                "assets/images/gun.png",
+                                                height: 30,
+                                              ),
+                                              const Text(
+                                                "Carrera",
+                                                style: TextStyle(
+                                                    fontSize: 21,
+                                                    color: Colors.white),
+                                              )
+                                            ],
+                                          ),
                                         ),
-                                        const SizedBox(height: 10),
-                                        const Text(
-                                          "Finalizado",
-                                          style: TextStyle(
-                                              fontSize: 21,
-                                              color: Colors.white),
-                                        )
+                                        Container(
+                                          height: 50,
+                                          width: 1, // The thickness of the line
+                                          color: Colors
+                                              .white, // The color of the line
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Image.asset(
+                                                "assets/images/f1.png",
+                                                height: 30,
+                                              ),
+                                              const Text(
+                                                "GB Hungria",
+                                                style: TextStyle(
+                                                    fontSize: 21,
+                                                    color: Colors.white),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 50,
+                                          width: 1, // The thickness of the line
+                                          color: Colors
+                                              .white, // The color of the line
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Image.asset(
+                                                "assets/images/txt.png",
+                                                color: gradOrange,
+                                              ),
+                                              const SizedBox(height: 10),
+                                              const Text(
+                                                "Finalizado",
+                                                style: TextStyle(
+                                                    fontSize: 21,
+                                                    color: Colors.white),
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                       ],
                                     ),
-                                  ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        top: 130,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Card(
+                              elevation: 10,
+                              child: Container(
+                                height: 120,
+                                width: screenWidth * 0.20,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20)),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Card(
+                              elevation: 10,
+                              child: Container(
+                                height: 120,
+                                width: screenWidth * 0.20,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20)),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Card(
+                              elevation: 10,
+                              child: Container(
+                                height: 120,
+                                width: screenWidth * 0.20,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Column(
+                                  children: [],
                                 ),
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    width: 20,
-                                    height: 100,
-                                    color: Colors.white,
-                                    padding: const EdgeInsets.all(5),
-                                  ),
-                                  const SizedBox(width: 5),
-                                  Container(
-                                      width: 20,
-                                      height: 100,
-                                      color: Colors.white,
-                                      padding: const EdgeInsets.all(5)),
-                                  const SizedBox(width: 5),
-                                  Container(
-                                      width: 20,
-                                      height: 100,
-                                      color: Colors.white,
-                                      padding: const EdgeInsets.all(5)),
-                                ],
-                              )
-                            ],
-                          ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      )
+                    ]),
                   )
                 ],
               ),
             ),
 
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.blue.shade100,
-                    borderRadius: BorderRadius.circular(5)),
-                width: double.infinity,
-                height: screenHeight / 3.5,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 15.0, horizontal: 25),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(
-                                height: 70,
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Image.asset("assets/images/f1.png"),
-                                    const Text(
-                                      "GB Hungria",
-                                      style: TextStyle(fontSize: 21),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 70,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Image.asset("assets/images/txt.png"),
-                                    const SizedBox(height: 10),
-                                    const Text(
-                                      "Finalizado",
-                                      style: TextStyle(fontSize: 21),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 70,
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Image.asset("assets/images/gun.png"),
-                                    const Text(
-                                      "Carrera",
-                                      style: TextStyle(fontSize: 21),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(
-                                  height: screenHeight / 6.9,
-                                  width: screenWidth / 3.3,
-                                  child: Card(
-                                    color: Colors.blue.shade300,
-                                    child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Image.asset("assets/images/cup.png"),
-                                          const Text(
-                                            "Formula 1",
-                                            style: TextStyle(fontSize: 18),
-                                          )
-                                        ]),
-                                  )),
-                              SizedBox(
-                                  height: screenHeight / 6.9,
-                                  width: screenWidth / 3.3,
-                                  child: Card(
-                                    color: Colors.blue.shade300,
-                                    child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                              "assets/images/handle.png"),
-                                          const Text(
-                                            "ENV VIVO",
-                                            style: TextStyle(fontSize: 18),
-                                          )
-                                        ]),
-                                  )),
-                              SizedBox(
-                                  height: screenHeight / 6.9,
-                                  width: screenWidth / 3.3,
-                                  child: Card(
-                                    color: Colors.blue.shade300,
-                                    child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Image.asset("assets/images/cal.png"),
-                                          Text(
-                                            " ${DateTime.now().day} / ${DateTime.now().month} / ${DateTime.now().year}",
-                                            style:
-                                                const TextStyle(fontSize: 18),
-                                          )
-                                        ]),
-                                  )),
-                            ])
-                      ]),
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: Container(
+            //     decoration: BoxDecoration(
+            //         color: Colors.blue.shade100,
+            //         borderRadius: BorderRadius.circular(5)),
+            //     width: double.infinity,
+            //     height: screenHeight / 3.5,
+            //     child: Padding(
+            //       padding: const EdgeInsets.all(8.0),
+            //       child: Column(
+            //           mainAxisAlignment: MainAxisAlignment.end,
+            //           children: [
+            //             Padding(
+            //               padding: const EdgeInsets.symmetric(
+            //                   vertical: 15.0, horizontal: 25),
+            //               child: Row(
+            //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //                 children: [
+            //                   SizedBox(
+            //                     height: 70,
+            //                     child: Column(
+            //                       mainAxisAlignment:
+            //                           MainAxisAlignment.spaceBetween,
+            //                       children: [
+            //                         Image.asset("assets/images/f1.png"),
+            //                         const Text(
+            //                           "GB Hungria",
+            //                           style: TextStyle(fontSize: 21),
+            //                         )
+            //                       ],
+            //                     ),
+            //                   ),
+            //                   SizedBox(
+            //                     height: 70,
+            //                     child: Column(
+            //                       mainAxisAlignment: MainAxisAlignment.end,
+            //                       children: [
+            //                         Image.asset("assets/images/txt.png"),
+            //                         const SizedBox(height: 10),
+            //                         const Text(
+            //                           "Finalizado",
+            //                           style: TextStyle(fontSize: 21),
+            //                         )
+            //                       ],
+            //                     ),
+            //                   ),
+            //                   SizedBox(
+            //                     height: 70,
+            //                     child: Column(
+            //                       mainAxisAlignment:
+            //                           MainAxisAlignment.spaceBetween,
+            //                       children: [
+            //                         Image.asset("assets/images/gun.png"),
+            //                         const Text(
+            //                           "Carrera",
+            //                           style: TextStyle(fontSize: 21),
+            //                         )
+            //                       ],
+            //                     ),
+            //                   ),
+            //                 ],
+            //               ),
+            //             ),
+            //             Row(
+            //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //                 children: [
+            //                   SizedBox(
+            //                       height: screenHeight / 6.9,
+            //                       width: screenWidth / 3.3,
+            //                       child: Card(
+            //                         color: Colors.blue.shade300,
+            //                         child: Column(
+            //                             mainAxisAlignment:
+            //                                 MainAxisAlignment.center,
+            //                             children: [
+            //                               Image.asset("assets/images/cup.png"),
+            //                               const Text(
+            //                                 "Formula 1",
+            //                                 style: TextStyle(fontSize: 18),
+            //                               )
+            //                             ]),
+            //                       )),
+            //                   SizedBox(
+            //                       height: screenHeight / 6.9,
+            //                       width: screenWidth / 3.3,
+            //                       child: Card(
+            //                         color: Colors.blue.shade300,
+            //                         child: Column(
+            //                             mainAxisAlignment:
+            //                                 MainAxisAlignment.center,
+            //                             children: [
+            //                               Image.asset(
+            //                                   "assets/images/handle.png"),
+            //                               const Text(
+            //                                 "ENV VIVO",
+            //                                 style: TextStyle(fontSize: 18),
+            //                               )
+            //                             ]),
+            //                       )),
+            //                   SizedBox(
+            //                       height: screenHeight / 6.9,
+            //                       width: screenWidth / 3.3,
+            //                       child: Card(
+            //                         color: Colors.blue.shade300,
+            //                         child: Column(
+            //                             mainAxisAlignment:
+            //                                 MainAxisAlignment.center,
+            //                             children: [
+            //                               Image.asset("assets/images/cal.png"),
+            //                               Text(
+            //                                 " ${DateTime.now().day} / ${DateTime.now().month} / ${DateTime.now().year}",
+            //                                 style:
+            //                                     const TextStyle(fontSize: 18),
+            //                               )
+            //                             ]),
+            //                       )),
+            //                 ])
+            //           ]),
+            //     ),
+            //   ),
+            // ),
             const Padding(
               padding: EdgeInsets.all(8.0),
               child: Align(

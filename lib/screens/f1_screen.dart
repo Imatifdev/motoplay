@@ -95,14 +95,13 @@ class _F1ScreenState extends State<F1Screen> {
               child: CircularProgressIndicator(),
             )
           : Container(
-            width: screenWidth,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [gradBlue, gradOrange])
-            ),
-            child: SingleChildScrollView(
+              width: screenWidth,
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [gradBlue, gradOrange])),
+              child: SingleChildScrollView(
                 child: Column(
                   //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -111,7 +110,7 @@ class _F1ScreenState extends State<F1Screen> {
                   ],
                 ),
               ),
-          ),
+            ),
     );
   }
 
@@ -169,7 +168,8 @@ class _F1ScreenState extends State<F1Screen> {
                             post["title"] ?? '',
                             softWrap: true,
                             textAlign: TextAlign.center,
-                            style: const TextStyle(color: Colors.white, fontSize: 20),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 20),
                           ),
                         ),
                       ),
