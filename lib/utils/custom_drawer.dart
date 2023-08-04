@@ -9,7 +9,6 @@ import '../screens/configration.dart';
 import '../screens/dmca.dart';
 import '../screens/donation.dart';
 import '../screens/privacy-policy.dart';
-import 'mycolors.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -19,7 +18,7 @@ class CustomDrawer extends StatelessWidget {
     return Drawer(
         backgroundColor: Colors.white,
         child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
