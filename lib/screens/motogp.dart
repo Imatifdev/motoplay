@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as htmlParser;
 import 'package:flutter/material.dart';
 import 'package:motplay/utils/constanst.dart';
+import 'package:motplay/utils/mycolors.dart';
 
 import 'blog_detail_screen.dart';
 
@@ -88,13 +89,18 @@ class _MotoGpState extends State<MotoGp> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : SingleChildScrollView(
-              child: Column(
-                children: [
-                  blogListWidget(screenWidth, f1List),
-                ],
-              ),
+          : Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(colors: [gradBlue, gradOrange])
             ),
+            child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    blogListWidget(screenWidth, f1List),
+                  ],
+                ),
+              ),
+          ),
     );
   }
 
@@ -102,14 +108,15 @@ class _MotoGpState extends State<MotoGp> {
 
   Widget blogListWidget(double screenWidth, List<Map<String, String?>> blogs) {
     return SizedBox(
-      height: 1000,
+      height: (315 * blogs.length).toDouble(),
       width: screenWidth - 5,
       child: ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
         scrollDirection: Axis.vertical,
         itemCount: blogs.length,
         itemBuilder: (context, index) {
           Map<String, String?> post =
-              blogs[index]; // Explicitly cast to Map<String, String?>
+              blogs[index];
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
@@ -150,7 +157,7 @@ class _MotoGpState extends State<MotoGp> {
                           child: Text(
                             post["title"] ?? '',
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white, fontSize: 20),
+                            style: const TextStyle(color: Colors.white, fontSize: 20),
                           ),
                         ),
                       ),

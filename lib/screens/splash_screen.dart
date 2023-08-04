@@ -1,7 +1,8 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:motplay/screens/dashboard.dart';
+import 'package:motplay/utils/custom_appbar.dart';
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -22,13 +23,12 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     // Navigate to the next screen after the animation is complete
     _animationController!.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        Navigator.pushReplacementNamed(context, '/nextScreen');
+        Navigator.pushReplacementNamed(context, Dashboard.routeName);
       }
     });
 
     _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_animationController!);
 
-    // Start the animation when the screen loads
     _animationController!.forward();
   }
 
@@ -52,10 +52,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         child: Center(
           child: FadeTransition(
             opacity: _animation!,
-            child: Text(
-              'MOTOPLAY',
-              style: GoogleFonts.poppins(fontSize: 45, color: Colors.white, fontWeight: FontWeight.bold),
-            ),
+            child: Image.asset("assets/images/logo.png")
           ),
         ),
       ),
