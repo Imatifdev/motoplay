@@ -18,6 +18,7 @@ class F1Screen extends StatefulWidget {
 class _F1ScreenState extends State<F1Screen> {
   List<Map<String, String?>> f1List = [];
   bool isLoading = false;
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -88,11 +89,11 @@ class _F1ScreenState extends State<F1Screen> {
       // appBar: AppBar(
       //   title: const Text('F1 Blogs'),
       // ),
+      key: scaffoldKey,
       body: isLoading
           ? const Center(
               child: CircularProgressIndicator(),
             )
-<<<<<<< Updated upstream
           : Container(
             width: screenWidth,
             decoration: const BoxDecoration(
@@ -100,22 +101,12 @@ class _F1ScreenState extends State<F1Screen> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [gradBlue, gradOrange])
-=======
-          : ListView(
-              children: [
-                Column(
-                  children: [
-                    blogListWidget(screenWidth, f1List),
-                  ],
-                )
-              ],
->>>>>>> Stashed changes
             ),
             child: SingleChildScrollView(
                 child: Column(
                   //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const CustomAppBar(title: "F1"),
+                    CustomAppBar(title: "F1", globalKey: scaffoldKey),
                     blogListWidget(screenWidth, f1List),
                   ],
                 ),
@@ -128,7 +119,7 @@ class _F1ScreenState extends State<F1Screen> {
 
   Widget blogListWidget(double screenWidth, List<Map<String, String?>> blogs) {
     return SizedBox(
-      height: (315 * blogs.length).toDouble(),
+      height: (320 * blogs.length).toDouble(),
       width: screenWidth - 5,
       child: ListView.builder(
         physics: const NeverScrollableScrollPhysics(),

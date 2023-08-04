@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:motplay/utils/mycolors.dart';
 class CustomAppBar extends StatelessWidget {
   final String title;
-  const CustomAppBar({super.key, required this.title});
+  final GlobalKey<ScaffoldState> globalKey;
+  const CustomAppBar({super.key, required this.title, required this.globalKey});
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +20,19 @@ class CustomAppBar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              IconButton(onPressed: (){}, icon: Icon(Icons.menu_rounded, size: 45, color: gradBlue,)),
+              IconButton(onPressed: (){
+                globalKey.currentState?.openDrawer();
+              }, icon: Icon(Icons.menu_rounded, size: 45, color: gradBlue,)),
               Text(title, style: TextStyle(fontSize: 20),),
-              CircleAvatar(child: IconButton(onPressed: (){
-                Navigator.of(context).pop();
-              }, icon: Icon(Icons.arrow_back_outlined, size: 25, color: gradBlue,) ))
+              Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: CircleAvatar(child: IconButton(onPressed: (){
+                    Navigator.of(context).pop();
+                  }, icon: Icon(Icons.arrow_back_outlined, size: 25, color: gradBlue,) )),
+                ),
+              )
             ],
           ),
         );
