@@ -3,8 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motplay/screens/dashboard.dart';
+<<<<<<< Updated upstream
 import 'package:motplay/screens/splash_screen.dart';
 import 'package:motplay/utils/custom_appbar.dart';
+=======
+import 'package:motplay/screens/motogp.dart';
+import 'package:motplay/screens/newhome.dart';
+import 'package:motplay/screens/splash_screen.dart';
+>>>>>>> Stashed changes
 
 void main() {
   runApp(const MyApp());
@@ -24,9 +30,13 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: Dashboard(),
+<<<<<<< Updated upstream
       routes: {
         Dashboard.routeName: (ctx) => Dashboard(),
       },
+=======
+      routes: {Dashboard.routeName: (ctx) => Dashboard()},
+>>>>>>> Stashed changes
     );
   }
 }

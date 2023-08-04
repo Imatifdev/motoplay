@@ -49,6 +49,7 @@ class Configration extends StatelessWidget {
                       'assets/images/cp.png',
                       height: 50,
                       width: 50,
+                      color: Colors.white,
                     ),
                     Text(
                       "Limpiar Cache",

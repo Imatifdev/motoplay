@@ -92,6 +92,7 @@ class _F1ScreenState extends State<F1Screen> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
+<<<<<<< Updated upstream
           : Container(
             width: screenWidth,
             decoration: const BoxDecoration(
@@ -99,6 +100,16 @@ class _F1ScreenState extends State<F1Screen> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [gradBlue, gradOrange])
+=======
+          : ListView(
+              children: [
+                Column(
+                  children: [
+                    blogListWidget(screenWidth, f1List),
+                  ],
+                )
+              ],
+>>>>>>> Stashed changes
             ),
             child: SingleChildScrollView(
                 child: Column(

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as htmlParser;
@@ -115,17 +117,6 @@ class _DashboardState extends State<Dashboard> {
       appBar: AppBar(
         backgroundColor: blue,
         elevation: 0,
-        // title: ElevatedButton(
-        //     onPressed: () async {
-        //       Map? map = await fetchPosts(blogIds[0], key);
-        //       print(map!['imageLink']);
-        //       print(posts);
-        //       //for(Map post in posts){
-        //       //print(posts);
-        //       //}
-        //       //imgLink();
-        //     },
-        //     child: const Text("API Call")),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       drawer: const CustomDrawer(),
@@ -133,292 +124,223 @@ class _DashboardState extends State<Dashboard> {
         child: SafeArea(
           child: Column(children: [
             SizedBox(
-  height: 400,
-  width: 500,
-  child: Row(
-    children: [
-      Expanded(
-        child: Stack(
-          alignment: Alignment.topCenter,
-          children: [
-            Positioned(
-              bottom: 20,
-              left:-60,
-              child: Image.asset(
-                'assets/images/bg.png',
-                height: 400,
-              ),
-            ),
-            Positioned(
-              left: 20,
+              height: 500,
+              width: 500,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  InkWell(
-                    onTap: () {
-                      print("ok");
-                    },
-                    child: CircleAvatar(
-                      radius: 35,
-                      backgroundColor: Colors.white,
-                      child: Card(
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Stack(
+                      children: [
+                        Image(
+                          height: 100,
+                          width: 300,
+                          image: AssetImage("assets/images/newbox.png"),
                         ),
-                        child: const CircleAvatar(
-                          radius: 32,
-                          backgroundColor: Colors.white,
-                          child: Text("MotoPlay"),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 60), // Adjust spacing between avatars
-                  InkWell(
-                    onTap: () {
-                      print("ok");
-                    },
-                    child: CircleAvatar(
-                      radius: 35,
-                      backgroundColor: Colors.white,
-                      child: Card(
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: const CircleAvatar(
-                          radius: 32,
-                          backgroundColor: Color(0xff005796),
-                          child: Text(
-                            "Hay",
-                            style: TextStyle(color: Colors.white),
+                        Positioned(
+                          left: 75, // Adjust the position as needed
+                          top: 25, // Adjust the position as needed
+                          child: ClipRect(
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              widthFactor: 0.5,
+                              child: CircleAvatar(
+                                radius: 25,
+                                backgroundImage:
+                                    AssetImage("assets/images/f1.png"),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 60), // Adjust spacing between avatars
-                  InkWell(
-                    onTap: () {
-                      print('ok');
-                    },
-                    child: CircleAvatar(
-                      radius: 35,
-                      backgroundColor: Colors.white,
-                      child: Card(
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: const CircleAvatar(
-                          radius: 32,
-                          backgroundColor: Colors.white,
-                          child: Text("Mañana"),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-      Padding(
-        padding:  const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            const Text("Indycar Por NodoSports", style: TextStyle(fontSize: 29, color: gradBlue),),
-            Container(
-              height: 300,
-              width: 250,
-              decoration: BoxDecoration(
-                color: gradBlue,
-                borderRadius: BorderRadius.circular(20)
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
-                          children: [
-                            Image.asset("assets/images/gun.png"),
-                            const Text(
-                              "Carrera",
-                              style: TextStyle(fontSize: 21, color: Colors.white),
-                            )
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
-                          children: [
-                            Image.asset("assets/images/f1.png"),
-                            const Text(
-                              "GB Hungria",
-                              style: TextStyle(fontSize: 21, color: Colors.white),
-                            )
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Image.asset("assets/images/txt.png", color: gradOrange,),
-                            const SizedBox(height: 10),
-                            const Text(
-                              "Finalizado",
-                              style: TextStyle(fontSize: 21, color: Colors.white),
-                            )
-                          ],
+                        Positioned(
+                          left: 150, // Adjust the position as needed
+                          top: 25, // Adjust the position as needed
+                          child: ClipRect(
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              widthFactor: 0.5,
+                              child: CircleAvatar(
+                                radius: 25,
+                                backgroundImage:
+                                    AssetImage("assets/images/f1.png"),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                    width: 20,
-                    height: 100,
-                    color: Colors.white,
-                    padding: const EdgeInsets.all(5),
-                  ),
-                  const SizedBox(width:5),
-                  Container(
-                    width: 20,
-                    height: 100,
-                    color: Colors.white,
-                    padding: const EdgeInsets.all(5)
-                  ),
-                  const SizedBox(width:5),
-                  Container(
-                    width: 20,
-                    height: 100,
-                    color: Colors.white,
-                    padding: const EdgeInsets.all(5)
-                  ),
-                    ],
                   )
-                ],
-              ),
-            ),
-          ],
-        ),
-      )
-    ],
-  ),
-),
 
-        
-            Container(
-              width: screenWidth,
-              height: screenHeight * 0.12,
-              decoration: BoxDecoration(color: blue, boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  blurRadius: 10.0,
-                  spreadRadius: 2.0,
-                  offset: const Offset(0, 3),
-                ),
-              ]),
-              child: Column(
-                children: [
-                  Text(
-                    "MOTOPLAY",
-                    style: TextStyle(fontSize: heading, color: Colors.white),
+                  // Expanded(
+                  //   child:
+                  //       // Positioned(
+                  //       //   bottom: 20,
+                  //       //   left: 0,
+                  //       //   child: Image.asset(
+                  //       //     'assets/images/newbox.png',
+                  //       //     height: 400,
+                  //       //   ),
+                  //       // ),
+                  //       // Positioned(
+                  //       //   left: 20,
+                  //       //   child: Column(
+                  //       //     mainAxisAlignment: MainAxisAlignment.center,
+                  //       //     crossAxisAlignment: CrossAxisAlignment.center,
+                  //       //     children: [
+                  //       //       const SizedBox(
+                  //       //           height: 60), // Adjust spacing between avatars
+                  //       //       InkWell(
+                  //       //         onTap: () {
+                  //       //           print("ok");
+                  //       //         },
+                  //       //         child: CircleAvatar(
+                  //       //           radius: 35,
+                  //       //           backgroundColor: Colors.white,
+                  //       //           child: Card(
+                  //       //             elevation: 10,
+                  //       //             shape: RoundedRectangleBorder(
+                  //       //               borderRadius: BorderRadius.circular(50),
+                  //       //             ),
+                  //       //             child: const CircleAvatar(
+                  //       //               radius: 32,
+                  //       //               backgroundColor: Color(0xff005796),
+                  //       //               child: Text(
+                  //       //                 "Hay",
+                  //       //                 style: TextStyle(color: Colors.white),
+                  //       //               ),
+                  //       //             ),
+                  //       //           ),
+                  //       //         ),
+                  //       //       ),
+                  //       //       const SizedBox(
+                  //       //           height: 60), // Adjust spacing between avatars
+                  //       //       InkWell(
+                  //       //         onTap: () {
+                  //       //           print('ok');
+                  //       //         },
+                  //       //         child: CircleAvatar(
+                  //       //           radius: 35,
+                  //       //           backgroundColor: Colors.white,
+                  //       //           child: Card(
+                  //       //             elevation: 10,
+                  //       //             shape: RoundedRectangleBorder(
+                  //       //               borderRadius: BorderRadius.circular(50),
+                  //       //             ),
+                  //       //             child: const CircleAvatar(
+                  //       //               radius: 32,
+                  //       //               backgroundColor: Colors.white,
+                  //       //               child: Text("Mañana"),
+                  //       //             ),
+                  //       //           ),
+                  //       //         ),
+                  //       //       ),
+                  //       //     ],
+                  //       //   ),
+                  //       // ),
+
+                  // ),
+                  ,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        const Text(
+                          "Indycar Por NodoSports",
+                          style: TextStyle(fontSize: 29, color: gradBlue),
+                        ),
+                        Container(
+                          height: 300,
+                          width: 250,
+                          decoration: BoxDecoration(
+                              color: gradBlue,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Image.asset("assets/images/gun.png"),
+                                        const Text(
+                                          "Carrera",
+                                          style: TextStyle(
+                                              fontSize: 21,
+                                              color: Colors.white),
+                                        )
+                                      ],
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Image.asset("assets/images/f1.png"),
+                                        const Text(
+                                          "GB Hungria",
+                                          style: TextStyle(
+                                              fontSize: 21,
+                                              color: Colors.white),
+                                        )
+                                      ],
+                                    ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Image.asset(
+                                          "assets/images/txt.png",
+                                          color: gradOrange,
+                                        ),
+                                        const SizedBox(height: 10),
+                                        const Text(
+                                          "Finalizado",
+                                          style: TextStyle(
+                                              fontSize: 21,
+                                              color: Colors.white),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    width: 20,
+                                    height: 100,
+                                    color: Colors.white,
+                                    padding: const EdgeInsets.all(5),
+                                  ),
+                                  const SizedBox(width: 5),
+                                  Container(
+                                      width: 20,
+                                      height: 100,
+                                      color: Colors.white,
+                                      padding: const EdgeInsets.all(5)),
+                                  const SizedBox(width: 5),
+                                  Container(
+                                      width: 20,
+                                      height: 100,
+                                      color: Colors.white,
+                                      padding: const EdgeInsets.all(5)),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),
             ),
-            SizedBox(
-              height: screenHeight * 0.02,
-            ),
-            Container(
-              width: screenWidth,
-              height: screenHeight * 0.03,
-              decoration: BoxDecoration(color: blue, boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  blurRadius: 10.0,
-                  spreadRadius: 2.0,
-                  offset: const Offset(0, 3), // Horizontal and vertical offset
-                ),
-              ]),
-              child: const Column(
-                children: [],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      selectedButton = 1; // Update the selectedButton to 1
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: selectedButton == 1 ? Colors.black : Colors.grey,
-                    onPrimary: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      side: BorderSide(
-                        color: selectedButton == 1 ? Colors.white : Colors.grey,
-                      ),
-                    ),
-                  ),
-                  child: const Text('Moto Play'),
-                ),
-                const SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      selectedButton = 2; // Update the selectedButton to 2
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: selectedButton == 2 ? Colors.black : Colors.grey,
-                    onPrimary: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      side: BorderSide(
-                        color: selectedButton == 2 ? Colors.white : Colors.grey,
-                      ),
-                    ),
-                  ),
-                  child: const Text('Hay'),
-                ),
-                const SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      selectedButton = 3; // Update the selectedButton to 3
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: selectedButton == 3 ? Colors.black : Colors.grey,
-                    onPrimary: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      side: BorderSide(
-                        color: selectedButton == 3 ? Colors.white : Colors.grey,
-                      ),
-                    ),
-                  ),
-                  child: const Text(
-                    'Mañana',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
+
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -653,9 +575,9 @@ class _DashboardState extends State<Dashboard> {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [gradBlue,gradOrange]),
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [gradBlue, gradOrange]),
       ),
       height: 500,
       width: screenWidth - 5,
@@ -668,7 +590,6 @@ class _DashboardState extends State<Dashboard> {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 8),
             child: InkWell(
-              
               onTap: () {
                 Navigator.push(
                   context,
@@ -679,9 +600,8 @@ class _DashboardState extends State<Dashboard> {
               },
               child: Container(
                 //height: 400,
-                width: screenWidth /1.5,
+                width: screenWidth / 1.5,
                 decoration: BoxDecoration(
-                  
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Stack(
@@ -690,17 +610,18 @@ class _DashboardState extends State<Dashboard> {
                       top: 0,
                       child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25)
-                        ),
+                            borderRadius: BorderRadius.circular(25)),
                         height: 450,
-                       //width: ,
+                        //width: ,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(25),
                           child: CachedNetworkImage(
-                           imageUrl: post["imageLink"] ?? '',
-                           placeholder: (context, url) => const CircularProgressIndicator(),
-                           errorWidget: (context, url, error) => const Icon(Icons.error),
-                           fit: BoxFit.cover,
+                            imageUrl: post["imageLink"] ?? '',
+                            placeholder: (context, url) =>
+                                const CircularProgressIndicator(),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
@@ -708,14 +629,15 @@ class _DashboardState extends State<Dashboard> {
                     Positioned(
                       bottom: 0,
                       child: Container(
-                        width: screenWidth/1.5,
+                        width: screenWidth / 1.5,
                         height: 60,
                         color: Colors.black.withOpacity(0.5),
                         child: Center(
                           child: Text(
                             post["title"] ?? '',
                             textAlign: TextAlign.center,
-                            style: const TextStyle(color: Colors.white, fontSize: 20),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 20),
                           ),
                         ),
                       ),
