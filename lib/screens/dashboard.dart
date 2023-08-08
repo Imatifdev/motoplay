@@ -200,6 +200,7 @@ class _DashboardState extends State<Dashboard> {
                                               Image.asset(
                                                 "assets/images/gun.png",
                                                 height: 30,
+                                                width: 40,
                                               ),
                                               const Text(
                                                 "Carrera",
@@ -225,6 +226,7 @@ class _DashboardState extends State<Dashboard> {
                                               Image.asset(
                                                 "assets/images/f1.png",
                                                 height: 30,
+                                                width: 20,
                                               ),
                                               const Text(
                                                 "GB Hungria",
@@ -249,6 +251,8 @@ class _DashboardState extends State<Dashboard> {
                                             children: [
                                               Image.asset(
                                                 "assets/images/txt.png",
+                                                height: 20,
+                                                width: 60,
                                                 color: gradOrange,
                                               ),
                                               const SizedBox(height: 10),
@@ -272,6 +276,7 @@ class _DashboardState extends State<Dashboard> {
                       ),
                       Positioned(
                         top: 130,
+                        left: 10,
                         child: Row(
                           children: [
                             SizedBox(
@@ -283,21 +288,25 @@ class _DashboardState extends State<Dashboard> {
                                 height: 120,
                                 width: screenWidth * 0.20,
                                 decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20)),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Card(
-                              elevation: 10,
-                              child: Container(
-                                height: 120,
-                                width: screenWidth * 0.20,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20)),
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/handle.png',
+                                      color: Colors.orangeAccent,
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "formula 1",
+                                      style: TextStyle(fontSize: 15),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -312,7 +321,53 @@ class _DashboardState extends State<Dashboard> {
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(20)),
                                 child: Column(
-                                  children: [],
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/cup.png',
+                                      color: Colors.orangeAccent,
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "En Vivo",
+                                      style: TextStyle(fontSize: 15),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Card(
+                              elevation: 10,
+                              child: Container(
+                                height: 120,
+                                width: screenWidth * 0.20,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Image.asset(
+                                          'assets/images/cal.png',
+                                          color: Colors.orangeAccent,
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          "22/10/2034",
+                                          style: TextStyle(fontSize: 15),
+                                        )
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -460,26 +515,6 @@ class _DashboardState extends State<Dashboard> {
                   )),
             ),
             blogListWidget(screenWidth, posts),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Moto GP",
-                    style: TextStyle(fontSize: 20),
-                  )),
-            ),
-            blogListWidget(screenWidth, gpList),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "F1 (R)",
-                    style: TextStyle(fontSize: 20),
-                  )),
-            ),
-            blogListWidget(screenWidth, f1List),
             //   SizedBox(
             //   height: 300,
             //   width: screenWidth-20,
@@ -564,7 +599,7 @@ class _DashboardState extends State<Dashboard> {
         gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [gradBlue, gradOrange]),
+            colors: [Colors.white, Colors.white]),
       ),
       height: 500,
       width: screenWidth - 5,
