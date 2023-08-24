@@ -382,129 +382,6 @@ class _DashboardState extends State<Dashboard> {
                 ],
               ),
             ),
-
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: Container(
-            //     decoration: BoxDecoration(
-            //         color: Colors.blue.shade100,
-            //         borderRadius: BorderRadius.circular(5)),
-            //     width: double.infinity,
-            //     height: screenHeight / 3.5,
-            //     child: Padding(
-            //       padding: const EdgeInsets.all(8.0),
-            //       child: Column(
-            //           mainAxisAlignment: MainAxisAlignment.end,
-            //           children: [
-            //             Padding(
-            //               padding: const EdgeInsets.symmetric(
-            //                   vertical: 15.0, horizontal: 25),
-            //               child: Row(
-            //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //                 children: [
-            //                   SizedBox(
-            //                     height: 70,
-            //                     child: Column(
-            //                       mainAxisAlignment:
-            //                           MainAxisAlignment.spaceBetween,
-            //                       children: [
-            //                         Image.asset("assets/images/f1.png"),
-            //                         const Text(
-            //                           "GB Hungria",
-            //                           style: TextStyle(fontSize: 21),
-            //                         )
-            //                       ],
-            //                     ),
-            //                   ),
-            //                   SizedBox(
-            //                     height: 70,
-            //                     child: Column(
-            //                       mainAxisAlignment: MainAxisAlignment.end,
-            //                       children: [
-            //                         Image.asset("assets/images/txt.png"),
-            //                         const SizedBox(height: 10),
-            //                         const Text(
-            //                           "Finalizado",
-            //                           style: TextStyle(fontSize: 21),
-            //                         )
-            //                       ],
-            //                     ),
-            //                   ),
-            //                   SizedBox(
-            //                     height: 70,
-            //                     child: Column(
-            //                       mainAxisAlignment:
-            //                           MainAxisAlignment.spaceBetween,
-            //                       children: [
-            //                         Image.asset("assets/images/gun.png"),
-            //                         const Text(
-            //                           "Carrera",
-            //                           style: TextStyle(fontSize: 21),
-            //                         )
-            //                       ],
-            //                     ),
-            //                   ),
-            //                 ],
-            //               ),
-            //             ),
-            //             Row(
-            //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //                 children: [
-            //                   SizedBox(
-            //                       height: screenHeight / 6.9,
-            //                       width: screenWidth / 3.3,
-            //                       child: Card(
-            //                         color: Colors.blue.shade300,
-            //                         child: Column(
-            //                             mainAxisAlignment:
-            //                                 MainAxisAlignment.center,
-            //                             children: [
-            //                               Image.asset("assets/images/cup.png"),
-            //                               const Text(
-            //                                 "Formula 1",
-            //                                 style: TextStyle(fontSize: 18),
-            //                               )
-            //                             ]),
-            //                       )),
-            //                   SizedBox(
-            //                       height: screenHeight / 6.9,
-            //                       width: screenWidth / 3.3,
-            //                       child: Card(
-            //                         color: Colors.blue.shade300,
-            //                         child: Column(
-            //                             mainAxisAlignment:
-            //                                 MainAxisAlignment.center,
-            //                             children: [
-            //                               Image.asset(
-            //                                   "assets/images/handle.png"),
-            //                               const Text(
-            //                                 "ENV VIVO",
-            //                                 style: TextStyle(fontSize: 18),
-            //                               )
-            //                             ]),
-            //                       )),
-            //                   SizedBox(
-            //                       height: screenHeight / 6.9,
-            //                       width: screenWidth / 3.3,
-            //                       child: Card(
-            //                         color: Colors.blue.shade300,
-            //                         child: Column(
-            //                             mainAxisAlignment:
-            //                                 MainAxisAlignment.center,
-            //                             children: [
-            //                               Image.asset("assets/images/cal.png"),
-            //                               Text(
-            //                                 " ${DateTime.now().day} / ${DateTime.now().month} / ${DateTime.now().year}",
-            //                                 style:
-            //                                     const TextStyle(fontSize: 18),
-            //                               )
-            //                             ]),
-            //                       )),
-            //                 ])
-            //           ]),
-            //     ),
-            //   ),
-            // ),
             const Padding(
               padding: EdgeInsets.all(8.0),
               child: Align(
@@ -515,78 +392,6 @@ class _DashboardState extends State<Dashboard> {
                   )),
             ),
             blogListWidget(screenWidth, posts),
-            //   SizedBox(
-            //   height: 300,
-            //   width: screenWidth-20,
-            //   child: ListView.builder(
-            //     //physics: const NeverScrollableScrollPhysics(),
-            //     scrollDirection: Axis.horizontal,
-            //     itemCount: f1List.length,
-            //     itemBuilder: (context, index) {
-            //       Map post = f1List[index];
-            //       return Padding(
-            //         padding: const EdgeInsets.all(8.0),
-            //         child: FutureBuilder(
-            //            future:getAllpost(),
-            //           builder: ((context, snapshot){
-            //       if (snapshot.connectionState == ConnectionState.waiting) {
-            //         return const Padding(
-            //           padding: EdgeInsets.all(8.0),
-            //           child: Center(
-            //             child: CircularProgressIndicator(),
-            //           ),
-            //         );
-            //       }
-            //       if (snapshot.hasError) {
-            //         return const Padding(
-            //           padding: EdgeInsets.all(8.0),
-            //           child: Center(
-            //             child: Text('Try Again'),
-            //           ),
-            //         );
-            //       } else {
-            //         return InkWell(
-            //             onTap: () {
-            //                         Navigator.push(
-            //                           context,
-            //                           MaterialPageRoute(
-            //                               builder: (context) => HTMLVIew(
-            //                                     data: snapshot.data!.items![index],
-            //                                   )),
-            //                         );
-            //                       },
-            //             child: Container(
-            //               height: 300,
-            //               width: screenWidth-10,
-            //               decoration: BoxDecoration(
-            //                 borderRadius: BorderRadius.circular(10)
-            //               ),
-            //               child: Stack(
-            //                 children: [
-            //                   Positioned(
-            //                     top: 0,
-            //                     child: SizedBox(
-            //                       height: 300,
-            //                       width: screenWidth,
-            //                       child: Image.network(post["imageLink"],fit: BoxFit.cover, )),
-            //                   ),
-            //                   Positioned(
-            //                     bottom: 0,
-            //                     child: Container(
-            //                     width: screenWidth,
-            //                     height: 60,
-            //                     color: Colors.black.withOpacity(0.5),
-            //                     child: Center(child: Text(post["title"], textAlign: TextAlign.center, style: const TextStyle(color: Colors.white, fontSize: 20),)) ))
-            //                 ],
-            //               ),
-            //             ),
-            //           );
-            //       }
-            //           }),
-            //         ),
-            //       );
-            //       }),
-            // )
           ]),
         ),
       ),
@@ -621,39 +426,29 @@ class _DashboardState extends State<Dashboard> {
                 );
               },
               child: Container(
-                //height: 400,
-                width: screenWidth / 1.5,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Stack(
-                  children: [
-                    Positioned(
-                      top: 0,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25)),
-                        height: 450,
-                        //width: ,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(25),
-                          child: CachedNetworkImage(
-                            imageUrl: post["imageLink"] ?? '',
-                            placeholder: (context, url) =>
-                                const CircularProgressIndicator(),
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
-                            fit: BoxFit.cover,
-                          ),
+                  height: 400,
+                  width: screenWidth / 1.5,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 300,
+                        width: 330,
+                        child: CachedNetworkImage(
+                          imageUrl: post["imageLink"] ?? '',
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                          fit: BoxFit.cover,
                         ),
                       ),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      child: Container(
+                      Container(
                         width: screenWidth / 1.5,
                         height: 60,
-                        color: Colors.black.withOpacity(0.5),
+                        color: Colors.black.withOpacity(0.7),
                         child: Center(
                           child: Text(
                             post["title"] ?? '',
@@ -663,10 +458,8 @@ class _DashboardState extends State<Dashboard> {
                           ),
                         ),
                       ),
-                    )
-                  ],
-                ),
-              ),
+                    ],
+                  )),
             ),
           );
         },
