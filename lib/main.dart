@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:motplay/screens/blocflutter.dart';
+import 'package:motplay/screens/blogscreentest.dart';
 import 'package:motplay/screens/dashboard.dart';
 
 void main() {
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: Dashboard(),
+      home: SplashScreen(),
       routes: {
         Dashboard.routeName: (ctx) => const Dashboard(),
       },
