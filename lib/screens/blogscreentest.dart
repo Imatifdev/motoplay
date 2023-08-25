@@ -57,8 +57,6 @@ class _PostListScreenState extends State<PostListScreen> {
                 title: Text(post.title),
                 subtitle: Html(
                   data: post.content,
-                  onLinkTap: (url, _, __, ___) =>
-                      _launchURL(url!), // Handle link taps
                 ),
               ),
             ],
