@@ -54,7 +54,7 @@ android {
 
     signingConfigs {
         debug {
-            storeFile file('E:/motoplay/debug.keystore')// Path to your debug.keystore file
+           // storeFile file('F:Apps/motoplay/debug.keystore')// Path to your debug.keystore file
             keyAlias 'androiddebugkey' // Key alias for debug keystore
             storePassword 'android' // Keystore password for debug keystore
             keyPassword 'android' // Key password for debug keystore

@@ -115,298 +115,319 @@ class _DashboardState extends State<Dashboard> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: blue,
+        title: Text("Moto Play", style: TextStyle(fontSize: 30, color:Colors.white),),
+        backgroundColor: gradBlue,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       drawer: const CustomDrawer(),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(children: [
-            SizedBox(
-              height: 150,
-              child: Stack(children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 100,
-                        width: screenWidth * 0.8,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage('assets/images/newbox.png')),
-                            borderRadius: BorderRadius.circular(20)),
-                      ),
-                    ],
-                  ),
-                ),
-                Positioned(
-                  top: 60,
-                  left: 70,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      CircleAvatar(
-                        radius: 40,
-                      ),
-                      SizedBox(
-                        width: 30,
-                      ),
-                      CircleAvatar(
-                        radius: 40,
-                      ),
-                    ],
-                  ),
-                )
-              ]),
-            ),
-            SizedBox(
-              height: 300,
-              width: 500,
+      body: Column(children: [
+        SizedBox(
+          height: 150,
+          child: Stack(children: [
+            Padding(
+              padding: const EdgeInsets.all(0.0),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 300,
-                    child: Stack(children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            const Text(
-                              "Indycar Por NodoSports",
-                              style: TextStyle(fontSize: 29, color: gradBlue),
-                            ),
-                            Container(
-                              height: 100,
-                              width: screenWidth * 0.8,
-                              decoration: BoxDecoration(
-                                  color: gradBlue,
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Image.asset(
-                                                "assets/images/gun.png",
-                                                height: 30,
-                                                width: 40,
-                                              ),
-                                              const Text(
-                                                "Carrera",
-                                                style: TextStyle(
-                                                    fontSize: 21,
-                                                    color: Colors.white),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
-                                          height: 50,
-                                          width: 1, // The thickness of the line
-                                          color: Colors
-                                              .white, // The color of the line
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Image.asset(
-                                                "assets/images/f1.png",
-                                                height: 30,
-                                                width: 20,
-                                              ),
-                                              const Text(
-                                                "GB Hungria",
-                                                style: TextStyle(
-                                                    fontSize: 21,
-                                                    color: Colors.white),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
-                                          height: 50,
-                                          width: 1, // The thickness of the line
-                                          color: Colors
-                                              .white, // The color of the line
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              Image.asset(
-                                                "assets/images/txt.png",
-                                                height: 20,
-                                                width: 60,
-                                                color: gradOrange,
-                                              ),
-                                              const SizedBox(height: 10),
-                                              const Text(
-                                                "Finalizado",
-                                                style: TextStyle(
-                                                    fontSize: 21,
-                                                    color: Colors.white),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Positioned(
-                        top: 130,
-                        left: 10,
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Card(
-                              elevation: 10,
-                              child: Container(
-                                height: 120,
-                                width: screenWidth * 0.20,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'assets/images/handle.png',
-                                      color: Colors.orangeAccent,
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      "formula 1",
-                                      style: TextStyle(fontSize: 15),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Card(
-                              elevation: 10,
-                              child: Container(
-                                height: 120,
-                                width: screenWidth * 0.20,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'assets/images/cup.png',
-                                      color: Colors.orangeAccent,
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      "En Vivo",
-                                      style: TextStyle(fontSize: 15),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Card(
-                              elevation: 10,
-                              child: Container(
-                                height: 120,
-                                width: screenWidth * 0.20,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        Image.asset(
-                                          'assets/images/cal.png',
-                                          color: Colors.orangeAccent,
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          "22/10/2034",
-                                          style: TextStyle(fontSize: 15),
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                          ],
-                        ),
-                      )
-                    ]),
-                  )
+                  Container(
+                    height: 100,
+                    width: screenWidth * 0.8,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/images/newbox.png')),
+                        borderRadius: BorderRadius.circular(20)),
+                  ),
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Latest Updates",
-                    style: TextStyle(fontSize: 20),
-                  )),
-            ),
-            blogListWidget(screenWidth, posts),
+            Positioned(
+              top:20,
+              left: (screenWidth/2)-70,
+              child: Text("Events", style: TextStyle(color: Colors.white, fontSize: 25),)),
+            Positioned(
+              top: 60,
+              left: 70,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  CircleAvatar(
+                    radius: 40,
+                    child:Text("Today")
+                  ),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  CircleAvatar(
+                    radius: 40,
+                    child:Text("Tomorrow")
+                  ),
+                ],
+              ),
+            )
           ]),
         ),
-      ),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: SizedBox(
+            height: 300,
+            width: screenWidth,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 5,
+              itemBuilder:(context, index) {
+                return EventWidget(screenWidth);
+              }),
+          ),
+        ),
+        Divider(),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Latest Updates",
+                style: TextStyle(fontSize: 25),
+              )),
+        ),
+        blogListWidget(screenWidth, posts),
+      ]),
     );
   }
 
+  SizedBox EventWidget(double screenWidth) {
+    return SizedBox(
+          height: 300,
+          width: 350,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 300,
+                child: Stack(children: [
+                  Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: Column(
+                      children: [
+                        const Text(
+                          "Indycar Por NodoSports",
+                          style: TextStyle(fontSize: 29, color: gradBlue),
+                        ),
+                        Container(
+                          height: 100,
+                          width: screenWidth * 0.8,
+                          decoration: BoxDecoration(
+                              color: gradBlue,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Image.asset(
+                                            "assets/images/gun.png",
+                                            height: 30,
+                                            width: 40,
+                                          ),
+                                          const Text(
+                                            "Carrera",
+                                            style: TextStyle(
+                                                fontSize: 21,
+                                                color: Colors.white),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 50,
+                                      width: 1, // The thickness of the line
+                                      color: Colors
+                                          .white, // The color of the line
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Image.asset(
+                                            "assets/images/f1.png",
+                                            height: 30,
+                                            width: 20,
+                                          ),
+                                          const Text(
+                                            "GB Hungria",
+                                            style: TextStyle(
+                                                fontSize: 21,
+                                                color: Colors.white),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 50,
+                                      width: 1, // The thickness of the line
+                                      color: Colors
+                                          .white, // The color of the line
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          Image.asset(
+                                            "assets/images/txt.png",
+                                            height: 20,
+                                            width: 60,
+                                            color: gradOrange,
+                                          ),
+                                          const SizedBox(height: 10),
+                                          const Text(
+                                            "Finalizado",
+                                            style: TextStyle(
+                                                fontSize: 21,
+                                                color: Colors.white),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    top: 130,
+                    left: 10,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Card(
+                          elevation: 10,
+                          child: Container(
+                            height: 120,
+                            width: screenWidth * 0.20,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/images/handle.png',
+                                  color: Colors.orangeAccent,
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "formula 1",
+                                  style: TextStyle(fontSize: 15),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Card(
+                          elevation: 10,
+                          child: Container(
+                            height: 120,
+                            width: screenWidth * 0.20,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/images/cup.png',
+                                  color: Colors.orangeAccent,
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "En Vivo",
+                                  style: TextStyle(fontSize: 15),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Card(
+                          elevation: 10,
+                          child: Container(
+                            height: 120,
+                            width: screenWidth * 0.20,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Column(
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/cal.png',
+                                      color: Colors.orangeAccent,
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "22/10/2034",
+                                      style: TextStyle(fontSize: 15),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                      ],
+                    ),
+                  )
+                ]),
+              )
+            ],
+          ),
+        );
+  }
+
   Widget blogListWidget(double screenWidth, List<Map<String, String?>> blogs) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.white, Colors.white]),
-      ),
-      height: 500,
+    double screenHeight = MediaQuery.of(context).size.height;
+    return SizedBox(
+      // decoration: const BoxDecoration(
+      //   gradient: LinearGradient(
+      //       begin: Alignment.topCenter,
+      //       end: Alignment.bottomCenter,
+      //       colors: [Colors.white, Colors.white]),
+      // ),
+      height: screenHeight/3,
       width: screenWidth - 5,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -415,7 +436,7 @@ class _DashboardState extends State<Dashboard> {
           Map<String, String?> post =
               blogs[index]; // Explicitly cast to Map<String, String?>
           return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 8),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -433,13 +454,16 @@ class _DashboardState extends State<Dashboard> {
                   ),
                   child: Column(
                     children: [
-                      Container(
-                        height: 300,
+                      SizedBox(
+                        height: screenHeight/4.1,
                         width: 330,
                         child: CachedNetworkImage(
                           imageUrl: post["imageLink"] ?? '',
                           placeholder: (context, url) =>
-                              const CircularProgressIndicator(),
+                              SizedBox(
+                                height: 50,
+                                width: 50,
+                                child: const CircularProgressIndicator()),
                           errorWidget: (context, url, error) =>
                               const Icon(Icons.error),
                           fit: BoxFit.cover,
