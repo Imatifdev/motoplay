@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const BlogPostsScreen(),
+      home: PostListScreen(),
       routes: {
         Dashboard.routeName: (ctx) => const Dashboard(),
       },
