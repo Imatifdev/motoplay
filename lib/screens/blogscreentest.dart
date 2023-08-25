@@ -1,108 +1,165 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import '../utils/constanst.dart';
+class Post {
+  final String title;
+  final String content;
+  final DateTime date;
 
-class BlogPostsScreen extends StatefulWidget {
-  @override
-  _BlogPostsScreenState createState() => _BlogPostsScreenState();
+  Post({
+    required this.title,
+    required this.content,
+    required this.date,
+  });
 }
 
-class _BlogPostsScreenState extends State<BlogPostsScreen> {
-  List<dynamic> _posts = [];
-
+class PostListScreen extends StatefulWidget {
   @override
-  void initState() {
-    super.initState();
-    fetchBlogPosts();
-  }
+  _PostListScreenState createState() => _PostListScreenState();
+}
 
-  Future<void> fetchBlogPosts() async {
-    for (var blogId in blogIds) {
-      final url =
-          'https://www.googleapis.com/blogger/v3/blogs/$blogId/posts?key=$key';
+class _PostListScreenState extends State<PostListScreen> {
+  List<Post> posts = [];
 
-      final response = await http.get(Uri.parse(url));
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        setState(() {
-          _posts.addAll(data['items']);
-        });
-      } else {
-        throw Exception('Failed to load blog posts');
-      }
-    }
+  void _addPost(String title, String content) {
+    final newPost = Post(
+      title: title,
+      content: content,
+      date: DateTime.now(),
+    );
+
+    setState(() {
+      posts.add(newPost);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Blogger Posts'),
-      ),
+      appBar: AppBar(title: Text('User Posts')),
       body: ListView.builder(
-        itemCount: _posts.length,
+        itemCount: posts.length,
         itemBuilder: (context, index) {
-          final post = _posts[index];
-          return ListTile(
-            title: Text(post['title']),
-            subtitle: Text(post['published']),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BlogPostDetailScreen(post: post),
+          final post = posts[index];
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (index == 0 || post.date.day != posts[index - 1].date.day)
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  child: Text(
+                    _formatDate(post.date),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                 ),
-              );
-            },
+              ListTile(
+                title: Text(post.title),
+                subtitle: Html(
+                  data: post.content,
+                  onLinkTap: (url, _, __, ___) =>
+                      _launchURL(url!), // Handle link taps
+                ),
+              ),
+            ],
           );
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _navigateToAddPostScreen();
+        },
+        child: Icon(Icons.add),
+      ),
     );
+  }
+
+  String _formatDate(DateTime date) {
+    if (date.day == DateTime.now().day) {
+      return 'Today';
+    } else if (date.day == DateTime.now().day - 1) {
+      return 'Yesterday';
+    } else if (date.day == DateTime.now().day + 1) {
+      return 'Tomorrow';
+    } else {
+      return date.toString();
+    }
+  }
+
+  void _navigateToAddPostScreen() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AddPostScreen()),
+    );
+
+    if (result != null && result is Map<String, String>) {
+      _addPost(result['title']!, result['content']!);
+    }
+  }
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
 
-class BlogPostDetailScreen extends StatelessWidget {
-  final dynamic post;
+class AddPostScreen extends StatefulWidget {
+  @override
+  _AddPostScreenState createState() => _AddPostScreenState();
+}
 
-  BlogPostDetailScreen({required this.post});
+class _AddPostScreenState extends State<AddPostScreen> {
+  final _titleController = TextEditingController();
+  final _contentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(post['title']),
-      ),
-      body: SingleChildScrollView(
+      appBar: AppBar(title: Text('Add Post')),
+      body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Published: ${post['published']}',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            TextField(
+              controller: _titleController,
+              decoration: InputDecoration(labelText: 'Title'),
             ),
-            SizedBox(height: 10),
-            Image.network(
-              post['images'][0]['url'], // Assuming there's at least one image
-              height: 200,
-              width: double.infinity,
-              fit: BoxFit.cover,
+            SizedBox(height: 16),
+            TextField(
+              controller: _contentController,
+              maxLines: 5,
+              decoration: InputDecoration(labelText: 'Content (HTML)'),
             ),
-            SizedBox(height: 10),
-            Text(
-              post['content'], // This contains the HTML content of the post
-              style: TextStyle(fontSize: 14),
+            SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                _savePost();
+              },
+              child: Text('Save Post'),
             ),
-            SizedBox(height: 10),
-            Text('URL: ${post['url']}'),
-            Text('Author: ${post['author']['displayName']}'),
-            Text('Labels: ${post['labels'].join(', ')}'),
-            Text('Replies: ${post['replies']['totalItems']}'),
           ],
         ),
       ),
     );
+  }
+
+  void _savePost() {
+    final title = _titleController.text;
+    final content = _contentController.text;
+
+    if (title.isNotEmpty && content.isNotEmpty) {
+      Navigator.pop(context, {'title': title, 'content': content});
+    }
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _contentController.dispose();
+    super.dispose();
   }
 }

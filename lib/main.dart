@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: SplashScreen(),
+      home: PostListScreen(),
       routes: {
         Dashboard.routeName: (ctx) => const Dashboard(),
       },
