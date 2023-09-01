@@ -481,81 +481,81 @@ class _DashboardState extends State<Dashboard> {
       ),
     );
   }
-  
+
   Widget ApiblogListWidget(double screenWidth, List<Blog> blogs) {
     double screenHeight = MediaQuery.of(context).size.height;
     final blogProvider = Provider.of<BlogProvider>(context, listen: false);
     return FutureBuilder(
-        future: blogProvider.fetchBlogs(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          } else {
-            return SizedBox(
-              height: screenHeight / 3,
-              width: screenWidth - 5,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: blogProvider.blogs.length,
-                itemBuilder: (context, index) {
-                  final blog = blogProvider.blogs[index];
-                  return InkWell(
-                    onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => BlogApiDetailsScreen(post: blog),));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-                      child: Container(
-                          width: screenWidth / 1.5,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                 height: screenHeight / 4,
-                                // width: screenWidth/2,
-                                child: CachedNetworkImage(
-                                  imageUrl:
-                                      "https://moto-play.visualmigration.com/public/uploads/images/${blog.image}",
-                                  placeholder: (context, url) => const Center(
-                                      // height: 50,
-                                      // width: 50,
-                                      child: CircularProgressIndicator()),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
-                                  fit: BoxFit.cover,
-                                ),
+      future: blogProvider.fetchBlogs(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return SizedBox(
+            height: screenHeight * .3,
+            width: screenWidth - 5,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: blogProvider.blogs.length,
+              itemBuilder: (context, index) {
+                final blog = blogProvider.blogs[index];
+                return InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => BlogApiDetailsScreen(post: blog),
+                    ));
+                  },
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                    child: Container(
+                        width: screenWidth / 1.5,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: screenHeight / 4,
+                              // width: screenWidth/2,
+                              child: CachedNetworkImage(
+                                imageUrl:
+                                    "https://moto-play.visualmigration.com/public/uploads/images/${blog.image}",
+                                placeholder: (context, url) => const Center(
+                                    // height: 50,
+                                    // width: 50,
+                                    child: CircularProgressIndicator()),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                                fit: BoxFit.cover,
                               ),
-                              Expanded(
-                                 
-                                // height: 60,
-                               // color: Colors.black.withOpacity(0.7),
-                                child: Container(
-                                  color:Colors.black.withOpacity(0.7),
-                                  child: Center(
-                                    child: Text(
-                                      blog.title ,
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                          color: Colors.white, fontSize: 20),
-                                    ),
+                            ),
+                            Expanded(
+                              // height: 60,
+                              // color: Colors.black.withOpacity(0.7),
+                              child: Container(
+                                color: Colors.black.withOpacity(0.7),
+                                child: Center(
+                                  child: Text(
+                                    blog.title,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 20),
                                   ),
                                 ),
                               ),
-                            ],
-                          )),
-                    ),
-                  );
-                },
-              ),
-            );
-          }
-        },
-      );
-
+                            ),
+                          ],
+                        )),
+                  ),
+                );
+              },
+            ),
+          );
+        }
+      },
+    );
   }
 }
-

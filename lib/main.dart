@@ -29,7 +29,7 @@ class MyApp1 extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
             useMaterial3: true,
           ),
-          home: SplashScreen(),
+          home: Dashboard(),
           routes: {
             Dashboard.routeName: (ctx) => const Dashboard(),
           },

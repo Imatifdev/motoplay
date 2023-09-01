@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:motplay/screens/exoplyertestapp.dart';
+import 'package:html_parser_plus/html_parser_plus.dart';
 
 class BlogApiDetailsScreen extends StatelessWidget {
   final Blog post;
@@ -15,16 +16,7 @@ class BlogApiDetailsScreen extends StatelessWidget {
         title: Text(post.title),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              const SizedBox(height: 8),
-              CachedNetworkImage(imageUrl: "https://moto-play.visualmigration.com/public/uploads/images/${post.image}"),
-              HtmlWidget(post.description),
-            ],
-          ),
-        ),
+        child: HtmlWidget(post.description),
       ),
     );
   }
