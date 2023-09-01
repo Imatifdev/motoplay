@@ -2,7 +2,9 @@
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:motplay/models/event_model.dart';
 import 'package:motplay/screens/blog_api_detail_screen.dart';
+import 'package:motplay/screens/event_api_detail_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:html/parser.dart' as htmlParser;
 import 'package:blogger_api/blogger_api.dart';
@@ -128,74 +130,77 @@ class _DashboardState extends State<Dashboard> {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       drawer: const CustomDrawer(),
-      body: Column(children: [
-        SizedBox(
-          height: 150,
-          child: Stack(children: [
-            Padding(
-              padding: const EdgeInsets.all(0.0),
-              child: Column(
-                children: [
-                  Container(
-                    height: 100,
-                    width: screenWidth * 0.8,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/images/newbox.png')),
-                        borderRadius: BorderRadius.circular(20)),
-                  ),
-                ],
+      body: SingleChildScrollView(
+        child: Column(children: [
+          SizedBox(
+            height: 150,
+            child: Stack(children: [
+              Padding(
+                padding: const EdgeInsets.all(0.0),
+                child: Column(
+                  children: [
+                    Container(
+                      height: 100,
+                      width: screenWidth * 0.8,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('assets/images/newbox.png')),
+                          borderRadius: BorderRadius.circular(20)),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Positioned(
-                top: 20,
-                left: (screenWidth / 2) - 70,
-                child: Text(
-                  "Events",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                )),
-            Positioned(
-              top: 60,
-              left: 70,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  CircleAvatar(radius: 40, child: Text("Today")),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  CircleAvatar(radius: 40, child: Text("Tomorrow")),
-                ],
-              ),
-            )
-          ]),
-        ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: SizedBox(
-            height: 300,
-            width: screenWidth,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return EventWidget(screenWidth);
-                }),
+              Positioned(
+                  top: 20,
+                  left: (screenWidth / 2) - 70,
+                  child: Text(
+                    "Events",
+                    style: TextStyle(color: Colors.white, fontSize: 25),
+                  )),
+              Positioned(
+                top: 60,
+                left: 70,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    CircleAvatar(radius: 40, child: Text("Today")),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    CircleAvatar(radius: 40, child: Text("Tomorrow")),
+                  ],
+                ),
+              )
+            ]),
           ),
-        ),
-        Divider(),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15),
-          child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "Latest Updates",
-                style: TextStyle(fontSize: 25),
-              )),
-        ),
-        //blogListWidget(screenWidth, posts),
-        ApiblogListWidget(screenWidth, blogProvider.blogs),
-      ]),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: SizedBox(
+              height: 300,
+              width: screenWidth,
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    return EventWidget(screenWidth);
+                  }),
+            ),
+          ),
+          ApiEventListWidget(screenWidth),
+          Divider(),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Latest Updates",
+                  style: TextStyle(fontSize: 25),
+                )),
+          ),
+          //blogListWidget(screenWidth, posts),
+          ApiblogListWidget(screenWidth, blogProvider.blogs),
+        ]),
+      ),
     );
   }
 
@@ -538,6 +543,81 @@ class _DashboardState extends State<Dashboard> {
                                   child: Center(
                                     child: Text(
                                       blog.title ,
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 20),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )),
+                    ),
+                  );
+                },
+              ),
+            );
+          }
+        },
+      );
+
+  }
+  
+  Widget ApiEventListWidget(double screenWidth) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    final eventProvider = Provider.of<EventProvider>(context, listen: false);
+    return FutureBuilder(
+        future: eventProvider.fetchEvents(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else {
+            return SizedBox(
+              height: screenHeight / 3,
+              width: screenWidth - 5,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: eventProvider.events.length,
+                itemBuilder: (context, index) {
+                  final event = eventProvider.events[index];
+                  return InkWell(
+                    onTap: (){
+                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => EventApiDetailScreen(event: event),));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                      child: Container(
+                          width: screenWidth / 1.5,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            children: [
+                              // SizedBox(
+                              //    height: screenHeight / 4,
+                              //   // width: screenWidth/2,
+                              //   child: CachedNetworkImage(
+                              //     imageUrl:
+                              //         "https://moto-play.visualmigration.com/public/uploads/images/${blog.image}",
+                              //     placeholder: (context, url) => const Center(
+                              //         // height: 50,
+                              //         // width: 50,
+                              //         child: CircularProgressIndicator()),
+                              //     errorWidget: (context, url, error) =>
+                              //         const Icon(Icons.error),
+                              //     fit: BoxFit.cover,
+                              //   ),
+                              //),
+                              Expanded(
+                                // height: 60,
+                               // color: Colors.black.withOpacity(0.7),
+                                child: Container(
+                                  color:Colors.black.withOpacity(0.7),
+                                  child: Center(
+                                    child: Text(
+                                      event.title ,
                                       textAlign: TextAlign.center,
                                       style: const TextStyle(
                                           color: Colors.white, fontSize: 20),
