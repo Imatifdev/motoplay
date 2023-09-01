@@ -3,10 +3,12 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:motplay/models/event_model.dart';
+import 'package:motplay/models/my_event.dart';
 import 'package:motplay/screens/blog_api_detail_screen.dart';
 import 'package:motplay/screens/event_api_detail_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:html/parser.dart' as htmlParser;
+import 'package:html/parser.dart' show parse;
 import 'package:blogger_api/blogger_api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -31,9 +33,45 @@ class _DashboardState extends State<Dashboard> {
   List<Map<String, String?>> posts = [];
   List<Map<String, String?>> gpList = [];
   List<Map<String, String?>> f1List = [];
+  List<MyEvent> eventsss = []; 
 
   @override
   void initState() {
+    eventsss = [];
+    String htmlCode = '''
+<div id="em20692y" class="match-event  " data-result='MotoPlay'> 
+  <a title="Carrera vs GP Bélgica" id="match-live" href="https://wegettingnoidu.blogspot.com/2023/05/f2-f3.html"> 
+    <div id="overlay-match"><div id="watch-match"></div></div> 
+  </a> 
+  <div class="first-team"> 
+    <div class="team-logo"> 
+      <img alt="Carrera" height="70" src="https://media.formula1.com/image/upload/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/Belgium%20carbon.png.transform/3col/image.png" title="Carrera" width="70"/> 
+    </div> 
+    <div class="team-name">Carrera</div> 
+  </div> 
+  <div class="match-time"> 
+    <div class="match-timing"> 
+      <div id="match-hour">8:30 AM</div> 
+      <div id="result-now">MotoPlay</div> 
+      <span id="dem6615y" class="match-date  " data-start="2023-07-30T08:30:00+02:00" data-gameends="2023-07-30T09:50:00+02:00"> </span> 
+    </div> 
+  </div> 
+  <div class="left-team"> 
+    <div class="team-logo"> 
+      <img alt="GP Bélgica" height="70" src="https://i.ibb.co/Wskffkd/f3333.png" title="GP Bélgica" width="70"/> 
+    </div> 
+    <div class="team-name">GP Bélgica</div> 
+  </div> 
+  <div class="match-info"> 
+    <ul> 
+      <li><span>30/07/2023</span></li> 
+      <li><span>MotoPlay</span></li> 
+      <li><span>Formula 3</span></li> 
+    </ul> 
+  </div> 
+</div>
+''';
+    parseHTML(htmlCode);
     super.initState();
     fetchPosts(blogIds[0], key);
   }
@@ -46,6 +84,61 @@ class _DashboardState extends State<Dashboard> {
     );
     return res;
   }
+  void parseHTML(String htmlContent) {
+  // Parse the HTML content
+  var document = parse(htmlContent);
+
+  // Find the div with the id "em20692y" (assuming it's unique)
+  var matchDiv = document.getElementById('em20692y');
+
+  if (matchDiv != null) {
+    // Extract the title attribute from the 'a' element inside the div
+    var title = matchDiv.querySelector('a')?.attributes['title'];
+
+    // Extract the link (href) from the 'a' element inside the div
+    var link = matchDiv.querySelector('a')?.attributes['href'];
+
+    // Extract the images' 'src' attribute from both team logos
+    var teamLogos = matchDiv.querySelectorAll('.team-logo img');
+    var firstTeamLogo = teamLogos[0]?.attributes['src'];
+    var secondTeamLogo = teamLogos[1]?.attributes['src'];
+
+    // Extract other information such as match time and date
+    var matchTime = matchDiv.querySelector('.match-time #match-hour')?.text;
+    var matchDate = matchDiv.querySelector('.match-info li span')?.text;
+
+    // Print the extracted information
+    print('Title: $title');
+    print('Link: $link');
+    print('First Team Logo: $firstTeamLogo');
+    print('Second Team Logo: $secondTeamLogo');
+    print('Match Time: $matchTime');
+    print('Match Date: $matchDate');
+    setState(() {
+      MyEvent eve = MyEvent(title: title as String, link: link as String, firstTeamLogo: firstTeamLogo as String, secondTeamLogo: secondTeamLogo as String, matchTime: matchTime as String, matchDate: matchDate as String);
+      eventsss.add(eve);
+    });
+  } else {
+    print('Match div not found');
+  }
+}
+
+List<String> splitStringWithVs(String inputString) {
+  // Find the index of "vs" in the input string
+  int vsIndex = inputString.indexOf('vs');
+
+  if (vsIndex != -1) {
+    // Split the string into two parts based on the "vs" keyword
+    String part1 = inputString.substring(0, vsIndex).trim();
+    String part2 = inputString.substring(vsIndex + 2).trim(); // +2 to skip "vs"
+
+    print([part1, part2]);
+    return [part1, part2];
+  } else {
+    // If "vs" is not found, return the original string as the first part and an empty string as the second part
+    return [inputString, ''];
+  }
+}
 
   Future<Map<String, String?>?> fetchPosts(String blogId, String apiKey) async {
     String url =
@@ -108,6 +201,7 @@ class _DashboardState extends State<Dashboard> {
     return null;
   }
 
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -128,6 +222,16 @@ class _DashboardState extends State<Dashboard> {
         backgroundColor: gradBlue,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
+        // actions: [
+        //   IconButton(onPressed: (){
+           
+        
+        
+
+        
+
+        //   }, icon: Icon(Icons.ac_unit_outlined))
+        //],
       ),
       drawer: const CustomDrawer(),
       body: SingleChildScrollView(
@@ -180,13 +284,36 @@ class _DashboardState extends State<Dashboard> {
               width: screenWidth,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 5,
+                  itemCount: eventsss.length,
                   itemBuilder: (context, index) {
-                    return EventWidget(screenWidth);
+                    MyEvent eve = eventsss[index];
+                    return EventWidget(screenWidth, eve);
                   }),
             ),
           ),
-          ApiEventListWidget(screenWidth),
+          // SizedBox(
+          //   height: 300,
+          //   child: ListView.builder(
+          //     itemCount: eventsss.length,
+          //     itemBuilder: (BuildContext context, int index) {
+          //       MyEvent eve = eventsss[index];
+          //       return Container(
+          //         padding: EdgeInsets.symmetric(horizontal: 10),
+          //         child: Column(
+          //           children: [
+          //             Text(eve.title),
+          //             Text(eve.link),
+          //             Text(eve.firstTeamLogo),
+          //             Text(eve.secondTeamLogo),
+          //             Text(eve.matchTime),
+          //             Text(eve.matchDate),
+          //           ],
+          //         ),
+          //       );
+          //     },
+          //   ),
+          // ),
+          //ApiEventListWidget(screenWidth),
           Divider(),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 15),
@@ -204,7 +331,10 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  SizedBox EventWidget(double screenWidth) {
+  SizedBox EventWidget(double screenWidth, MyEvent event) {
+    List<String> oneTwo = [];
+    String text1 = "";
+    String text2 = "";
     return SizedBox(
       height: 300,
       width: 350,
@@ -217,9 +347,18 @@ class _DashboardState extends State<Dashboard> {
                 padding: const EdgeInsets.all(0.0),
                 child: Column(
                   children: [
-                    const Text(
-                      "Indycar Por NodoSports",
-                      style: TextStyle(fontSize: 29, color: gradBlue),
+                    InkWell(
+                      onTap: (){
+                        setState(() {
+                          oneTwo = splitStringWithVs(event.title);
+                          text1 = oneTwo.first;
+                          text2 = oneTwo.last;
+                        });
+                      },
+                      child: Text(
+                        event.title,
+                        style: TextStyle(fontSize: 29, color: gradBlue),
+                      ),
                     ),
                     Container(
                       height: 100,
@@ -240,13 +379,18 @@ class _DashboardState extends State<Dashboard> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Image.asset(
-                                        "assets/images/gun.png",
+                                      CachedNetworkImage(
+                                        imageUrl: event.firstTeamLogo,
                                         height: 30,
                                         width: 40,
+                                        placeholder: (context, url) =>
+                CircularProgressIndicator(), // Placeholder widget while loading
+            errorWidget: (context, url, error) => Icon(
+                Icons.error),
                                       ),
-                                      const Text(
-                                        "Carrera",
+                                      Text(
+                                     "Carrera",
+                                     // oneTwo.isEmpty?"" :oneTwo[0],  
                                         style: TextStyle(
                                             fontSize: 21, color: Colors.white),
                                       )
@@ -264,13 +408,18 @@ class _DashboardState extends State<Dashboard> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Image.asset(
-                                        "assets/images/f1.png",
+                                      CachedNetworkImage(
+                                        imageUrl: event.secondTeamLogo ,
                                         height: 30,
                                         width: 20,
+                                        placeholder: (context, url) =>
+                CircularProgressIndicator(), // Placeholder widget while loading
+            errorWidget: (context, url, error) => Icon(
+                Icons.error),
                                       ),
-                                      const Text(
-                                        "GB Hungria",
+                                      Text(
+                                        "GP Bélgica",
+                                        //oneTwo.isEmpty?"" :oneTwo[1],
                                         style: TextStyle(
                                             fontSize: 21, color: Colors.white),
                                       )
@@ -399,7 +548,7 @@ class _DashboardState extends State<Dashboard> {
                                   height: 10,
                                 ),
                                 Text(
-                                  "22/10/2034",
+                                  event.matchDate,
                                   style: TextStyle(fontSize: 15),
                                 )
                               ],
