@@ -2,11 +2,14 @@
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:motplay/screens/blog_api_detail_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:html/parser.dart' as htmlParser;
 import 'package:blogger_api/blogger_api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:motplay/screens/exoplyertestapp.dart';
 import '../utils/constanst.dart';
 import '../utils/custom_drawer.dart';
 import '../utils/mycolors.dart';
@@ -108,6 +111,7 @@ class _DashboardState extends State<Dashboard> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     final textScaleFactor = MediaQuery.of(context).textScaleFactor;
+    final blogProvider = Provider.of<BlogProvider>(context, listen: false);
     // Adjust font size based on screen width and text scale factor
     //final fontSize = screenWidth * 0.14 * textScaleFactor;
     //final subheading = screenWidth * 0.07 * textScaleFactor;
@@ -116,7 +120,7 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Moto Play",
+          "MotoPlay",
           style: TextStyle(fontSize: 30, color: Colors.white),
         ),
         backgroundColor: gradBlue,
@@ -189,7 +193,8 @@ class _DashboardState extends State<Dashboard> {
                 style: TextStyle(fontSize: 25),
               )),
         ),
-        blogListWidget(screenWidth, posts),
+        //blogListWidget(screenWidth, posts),
+        ApiblogListWidget(screenWidth, blogProvider.blogs),
       ]),
     );
   }
@@ -414,12 +419,6 @@ class _DashboardState extends State<Dashboard> {
   Widget blogListWidget(double screenWidth, List<Map<String, String?>> blogs) {
     double screenHeight = MediaQuery.of(context).size.height;
     return SizedBox(
-      // decoration: const BoxDecoration(
-      //   gradient: LinearGradient(
-      //       begin: Alignment.topCenter,
-      //       end: Alignment.bottomCenter,
-      //       colors: [Colors.white, Colors.white]),
-      // ),
       height: screenHeight / 3,
       width: screenWidth - 5,
       child: ListView.builder(
@@ -482,4 +481,81 @@ class _DashboardState extends State<Dashboard> {
       ),
     );
   }
+  
+  Widget ApiblogListWidget(double screenWidth, List<Blog> blogs) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    final blogProvider = Provider.of<BlogProvider>(context, listen: false);
+    return FutureBuilder(
+        future: blogProvider.fetchBlogs(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else {
+            return SizedBox(
+              height: screenHeight / 3,
+              width: screenWidth - 5,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: blogProvider.blogs.length,
+                itemBuilder: (context, index) {
+                  final blog = blogProvider.blogs[index];
+                  return InkWell(
+                    onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => BlogApiDetailsScreen(post: blog),));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                      child: Container(
+                          width: screenWidth / 1.5,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                 height: screenHeight / 4,
+                                // width: screenWidth/2,
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      "https://moto-play.visualmigration.com/public/uploads/images/${blog.image}",
+                                  placeholder: (context, url) => const Center(
+                                      // height: 50,
+                                      // width: 50,
+                                      child: CircularProgressIndicator()),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Expanded(
+                                 
+                                // height: 60,
+                               // color: Colors.black.withOpacity(0.7),
+                                child: Container(
+                                  color:Colors.black.withOpacity(0.7),
+                                  child: Center(
+                                    child: Text(
+                                      blog.title ,
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 20),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )),
+                    ),
+                  );
+                },
+              ),
+            );
+          }
+        },
+      );
+
+  }
 }
+
