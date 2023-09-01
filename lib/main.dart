@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:motplay/models/event_model.dart';
 import 'package:motplay/screens/blocflutter.dart';
 import 'package:motplay/screens/blogscreentest.dart';
 import 'package:motplay/screens/dashboard.dart';
@@ -19,8 +20,11 @@ class MyApp1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (context) => BlogProvider(),
+    return MultiProvider(
+        providers:[
+          ChangeNotifierProvider(create: (context) => BlogProvider(),),
+          ChangeNotifierProvider(create: (context) => EventProvider(),),
+        ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Moto Play',
