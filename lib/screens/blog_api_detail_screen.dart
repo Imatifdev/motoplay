@@ -16,7 +16,13 @@ class BlogApiDetailsScreen extends StatelessWidget {
         title: Text(post.title),
       ),
       body: SingleChildScrollView(
-        child: HtmlWidget(post.description),
+        child: SizedBox(
+            height: 900,
+            width: 400,
+            child: ListView(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                children: [HtmlWidget(post.description)])),
       ),
     );
   }
